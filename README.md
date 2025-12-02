@@ -47,7 +47,7 @@ Syncfusion’s dashboard adapts naturally to logistics and supply chain workflow
 
 ## Output
 
-
+![SupplyChainDashboardImage](https://github.com/user-attachments/assets/4360d339-5e88-4b6c-b5fa-dfbb38395d9b)
 
 ## Troubleshooting
 
