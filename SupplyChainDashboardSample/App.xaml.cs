@@ -12,6 +12,11 @@ public partial class App : Application
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        return new Window(new AppShell());
+        var isDesktop = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.TV;
+        Page root = isDesktop
+            ? new DesktopView()
+            : new MobileView();
+
+        return new Window(root);
     }
 }

@@ -1,12 +1,9 @@
-﻿using SupplyChainDashboardSample.ViewModels;
-
-namespace SupplyChainDashboardSample;
+﻿namespace SupplyChainDashboardSample;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage(InventoryDashboardViewModel vm)
+    public MainPage()
     {
         InitializeComponent();
-        BindingContext = vm;
     }
 }
