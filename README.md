@@ -1,4 +1,4 @@
-# Supply Chain & Logistics Dashboard Sample: Track Shipments, Delivery, and Inventory
+# Supply Chain & Logistics Dashboard Sample using Syncfusion .NET MAUI Charts and Gauges
 
 Discover how to visualize shipment status, delivery times, and inventory levels using Syncfusion’s .NET MAUI controls.
 
