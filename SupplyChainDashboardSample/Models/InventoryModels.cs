@@ -186,19 +186,18 @@ namespace SupplyChainDashboardSample.Models
         /// </summary>
         public static ObservableCollection<TopItem> BuildTopItems()
         {
-            // Amount is a share (0..1 range). Quantity is an absolute demo value.
             return new ObservableCollection<TopItem>
             {
-                new TopItem { Code = "C100006", Name = "C100006 - Cherry Finished Crystal Model", Amount = 0.14, Quantity = 156000 },
-                new TopItem { Code = "C100011", Name = "C100011 - Winter Frost Vase", Amount = 0.13, Quantity = 143000 },
-                new TopItem { Code = "C100055", Name = "C100055 - Silver Plated Photo Frame", Amount = 0.12, Quantity = 132000 },
-                new TopItem { Code = "C100009", Name = "C100009 - Normandy Vase", Amount = 0.12, Quantity = 120000 },
-                new TopItem { Code = "C100010", Name = "C100010 - Wisper-Cut Vase", Amount = 0.12, Quantity = 118000 },
-                new TopItem { Code = "C100040", Name = "C100040 - Channel Speaker System", Amount = 0.09, Quantity = 95000 },
-                new TopItem { Code = "C100004", Name = "C100004 - Walnut Medallion Plate", Amount = 0.08, Quantity = 84000 },
-                new TopItem { Code = "C100005", Name = "C100005 - Cherry Finished Crystal Bowl", Amount = 0.08, Quantity = 82000 },
-                new TopItem { Code = "C100003", Name = "C100003 - Cherry Finish Frame", Amount = 0.08, Quantity = 81000 },
-                new TopItem { Code = "C100051", Name = "C100051 - Bamboo Digital Picture Frame", Amount = 0.08, Quantity = 79000 },
+                new TopItem { Code = "C100006", Name = "C100006 - Cherry Finished Crystal Model", Amount = 14, Quantity = 156000 },
+                new TopItem { Code = "C100011", Name = "C100011 - Winter Frost Vase", Amount = 13, Quantity = 143000 },
+                new TopItem { Code = "C100055", Name = "C100055 - Silver Plated Photo Frame", Amount = 12, Quantity = 132000 },
+                new TopItem { Code = "C100009", Name = "C100009 - Normandy Vase", Amount = 12, Quantity = 120000 },
+                new TopItem { Code = "C100010", Name = "C100010 - Wisper-Cut Vase", Amount = 12, Quantity = 118000 },
+                new TopItem { Code = "C100040", Name = "C100040 - Channel Speaker System", Amount = 9, Quantity = 95000 },
+                new TopItem { Code = "C100004", Name = "C100004 - Walnut Medallion Plate", Amount = 8, Quantity = 84000 },
+                new TopItem { Code = "C100005", Name = "C100005 - Cherry Finished Crystal Bowl", Amount = 8, Quantity = 82000 },
+                new TopItem { Code = "C100003", Name = "C100003 - Cherry Finish Frame", Amount = 8, Quantity = 81000 },
+                new TopItem { Code = "C100051", Name = "C100051 - Bamboo Digital Picture Frame", Amount = 8, Quantity = 79000 },
             };
         }
     }
