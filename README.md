@@ -1,4 +1,4 @@
-# Supply Chain & Logistics Dashboard Sample using Syncfusion .NET MAUI Charts and Gauges
+# Easily Build a Supply Chain Dashboard with Syncfusion® .NET MAUI Charts and Gauges
 
 Discover how to visualize shipment status, delivery times, and inventory levels using Syncfusion’s .NET MAUI controls.
 
@@ -47,7 +47,7 @@ Syncfusion’s dashboard adapts naturally to logistics and supply chain workflow
 
 ## Output
 
-![SupplyChainDashboardImage](https://github.com/user-attachments/assets/4360d339-5e88-4b6c-b5fa-dfbb38395d9b)
+![SupplyChainDashboardImage](https://github.com/user-attachments/assets/0c1a4d82-a6b1-468a-8852-07df699a48fd)
 
 ## Troubleshooting
 
