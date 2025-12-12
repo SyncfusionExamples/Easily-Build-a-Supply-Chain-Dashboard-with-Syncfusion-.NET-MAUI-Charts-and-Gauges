@@ -4,7 +4,7 @@
              x:Class="SupplyChainDashboardSample.DesktopView"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:vm="clr-namespace:SupplyChainDashboardSample.ViewModels"
-             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
              xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
              x:DataType="vm:InventoryDashboardViewModel"
              Shell.NavBarIsVisible="False"
