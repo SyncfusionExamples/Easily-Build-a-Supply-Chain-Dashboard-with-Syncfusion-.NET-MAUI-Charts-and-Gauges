@@ -318,7 +318,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="12"/>
                     </Border.StrokeShape>
-                    <Grid RowDefinitions="Auto,*">
+                    <Grid RowDefinitions="Auto,*,Auto">
                         <Label Text="Top 10 Items Based on Value" FontAttributes="Bold"/>
                         <chart:SfCartesianChart Grid.Row="1" IsTransposed="True" HeightRequest="390">
                             <chart:SfCartesianChart.YAxes>
@@ -346,12 +346,46 @@
                                 <chart:ColumnSeries 
                                     ItemsSource="{Binding TopItems}" 
                                     XBindingPath="Name" 
-                                    YBindingPath="Amount" 
+                                    YBindingPath="{Binding TopItemsMetricPath}"
                                     Width="0.5"
                                     Fill="#2fcf75"
                                     EnableTooltip="True"/>
                             </chart:SfCartesianChart.Series>
                         </chart:SfCartesianChart>
+
+                        <!-- Toggle buttons -->
+                        <HorizontalStackLayout Grid.Row="2" Spacing="10" HorizontalOptions="Center">
+                            <Button Text="Value" Command="{Binding SetTopItemsMetricCommand}" CommandParameter="Value" WidthRequest="100">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BackgroundColor" Value="#1f2937"/>
+                                        <Setter Property="TextColor" Value="#e5e7eb"/>
+                                        <Setter Property="CornerRadius" Value="20"/>
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TopItemsMetricPath}" Value="Amount">
+                                                <Setter Property="BackgroundColor" Value="#2fcf75"/>
+                                                <Setter Property="TextColor" Value="Black"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Text="Quantity" Command="{Binding SetTopItemsMetricCommand}" CommandParameter="Quantity" WidthRequest="100">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BackgroundColor" Value="#1f2937"/>
+                                        <Setter Property="TextColor" Value="#e5e7eb"/>
+                                        <Setter Property="CornerRadius" Value="20"/>
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TopItemsMetricPath}" Value="Quantity">
+                                                <Setter Property="BackgroundColor" Value="#2fcf75"/>
+                                                <Setter Property="TextColor" Value="Black"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </HorizontalStackLayout>
                     </Grid>
                 </Border>
 

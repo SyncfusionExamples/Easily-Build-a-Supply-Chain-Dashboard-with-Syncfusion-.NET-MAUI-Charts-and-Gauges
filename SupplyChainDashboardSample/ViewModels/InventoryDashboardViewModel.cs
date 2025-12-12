@@ -1,20 +1,32 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Microsoft.Maui.Controls;
 using SupplyChainDashboardSample.Models;
 
 namespace SupplyChainDashboardSample.ViewModels
 {
+
     /// <summary>
     /// ViewModel that exposes inventory KPIs, time-series, and derived datasets
     /// used by the Inventory dashboard UI. Implements change notification for bindings.
     /// </summary>
     public class InventoryDashboardViewModel : INotifyPropertyChanged
     {
+        public InventoryDashboardViewModel()
+        {
+            SetTopItemsMetricCommand = new Command<string>(p =>
+            {
+                TopItemsMetricPath = (p == "Quantity") ? "Quantity" : "Amount";
+            });
+        }
+
         /// <summary>
         /// Raised when a property value changes to notify the UI bindings.
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
+
         /// <summary>
         /// Helper to set a backing field and raise <see cref="PropertyChanged"/> when the value actually changes.
         /// </summary>
@@ -43,27 +55,32 @@ namespace SupplyChainDashboardSample.ViewModels
         /// Simulated monthly inventory valuation series used for trend charts.
         /// </summary>
         public ObservableCollection<MonthValue> InventoryValueOverTime { get; } = DemoInventoryData.BuildInventoryValue();
+
         /// <summary>
         /// Simulated monthly inventory turnover days used for performance tracking.
         /// </summary>
         public ObservableCollection<MonthValue> TurnoverDays { get; } = DemoInventoryData.BuildTurnoverDays();
+
         /// <summary>
         /// Simulated movement breakdown showing increases, decreases, and summary.
         /// </summary>
         public ObservableCollection<MonthValue> InventoryMovement { get; } = DemoInventoryData.BuildMovement();
+
         /// <summary>
         /// Simulated series correlating inventory values with sales and ratio.
         /// </summary>
         public ObservableCollection<MonthValue> InventoryToSales { get; } = DemoInventoryData.BuildInventoryToSales();
+
         /// <summary>
         /// Simulated list of top items contributing to inventory amount.
         /// </summary>
         public ObservableCollection<TopItem> TopItems { get; } = DemoInventoryData.BuildTopItems();
 
-        bool _valueMode = true;
-        /// <summary>
-        /// Toggles how certain visuals present data (e.g., absolute values vs. alternate mode).
-        /// </summary>
-        public bool ValueMode { get => _valueMode; set => Set(ref _valueMode, value); }
+        // Top items metric switching (default is Value i.e., "Amount")
+        string _topItemsMetricPath = "Amount";
+        public string TopItemsMetricPath { get => _topItemsMetricPath; set => Set(ref _topItemsMetricPath, value); }
+
+        // Command to switch between Amount and Quantity
+        public ICommand SetTopItemsMetricCommand { get; }
     }
 }
