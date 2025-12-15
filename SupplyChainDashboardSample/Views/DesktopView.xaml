@@ -178,7 +178,7 @@
                             <RoundRectangle CornerRadius="12"/>
                         </Border.StrokeShape>
                         <Grid RowDefinitions="*">
-                            <Label Text="AVG. INVENTORY DAYS OF SUPPLY" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
+                            <Label Text="AVERAGE INVENTORY DAYS OF SUPPLY" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
                             <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
                                 <gauge:SfRadialGauge.Axes>
                                     <gauge:RadialAxis Minimum="0" Maximum="60" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
