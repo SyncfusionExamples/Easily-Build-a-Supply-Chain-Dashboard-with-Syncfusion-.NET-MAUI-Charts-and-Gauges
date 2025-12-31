@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             xmlns:vm="clr-namespace:SupplyChainDashboardSample.ViewModels"
+             xmlns:vm="clr-namespace:SupplyChainDashboardSample"
              xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
              xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
              x:Class="SupplyChainDashboardSample.MobileView"
@@ -222,8 +222,8 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries ItemsSource="{Binding InventoryValueOverTime}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" Fill="#2fcf75" Label="Inventory Value"/>
-                                    <chart:SplineSeries ItemsSource="{Binding InventoryValueOverTime}" XBindingPath="Month" YBindingPath="Change" EnableTooltip="True" Fill="LightGrey" StrokeWidth="3" Label="Change"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding InventoryValueOverTime}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75" Label="Inventory Value"/>
+                                    <chart:SplineSeries ItemsSource="{Binding InventoryValueOverTime}" XBindingPath="Month" YBindingPath="Change" EnableTooltip="True" EnableAnimation="True" Fill="LightGrey" StrokeWidth="3" Label="Change"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -236,13 +236,6 @@
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Turnover (Days) by Month" FontAttributes="Bold"/>
                             <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
-                                <chart:SfCartesianChart.Legend>
-                                    <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
-                                        <chart:ChartLegend.LabelStyle>
-                                            <chart:ChartLegendLabelStyle TextColor="LightGray"/>
-                                        </chart:ChartLegend.LabelStyle>
-                                    </chart:ChartLegend>
-                                </chart:SfCartesianChart.Legend>
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
                                         <chart:CategoryAxis.LabelStyle>
@@ -261,7 +254,7 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:SplineSeries ItemsSource="{Binding TurnoverDays}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" Fill="#d4a0e8" StrokeWidth="3" Label="Turnover"/>
+                                    <chart:SplineSeries ItemsSource="{Binding TurnoverDays}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" EnableAnimation="True" Fill="#d4a0e8" StrokeWidth="3" Label="Turnover"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -274,13 +267,6 @@
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Inventory Movement" FontAttributes="Bold"/>
                             <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
-                                <chart:SfCartesianChart.Legend>
-                                    <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
-                                        <chart:ChartLegend.LabelStyle>
-                                            <chart:ChartLegendLabelStyle TextColor="LightGray"/>
-                                        </chart:ChartLegend.LabelStyle>
-                                    </chart:ChartLegend>
-                                </chart:SfCartesianChart.Legend>
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
                                         <chart:CategoryAxis.LabelStyle>
@@ -299,7 +285,7 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:WaterfallSeries ItemsSource="{Binding InventoryMovement}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" Fill="#00a67e" NegativePointsBrush="#fb7185" SummaryPointsBrush="#06b6d4" SummaryBindingPath="IsSummary" Label="Increase"/>
+                                    <chart:WaterfallSeries ItemsSource="{Binding InventoryMovement}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" EnableAnimation="True" Fill="#00a67e" NegativePointsBrush="#fb7185" SummaryPointsBrush="#06b6d4" SummaryBindingPath="IsSummary" Label="Increase"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -342,9 +328,9 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" Fill="#2fcf75" Label="Inventory Value"/>
-                                    <chart:ColumnSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Secondary" EnableTooltip="True" Fill="#ffcf66" Label="Sales Amount"/>
-                                    <chart:SplineSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Ratio" YAxisName="RatioAxis" EnableTooltip="True" Fill="#2162af" StrokeWidth="3" Label="Ratio"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75" Label="Inventory Value"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Secondary" EnableTooltip="True" EnableAnimation="True" Fill="#ffcf66" Label="Sales Amount"/>
+                                    <chart:SplineSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Ratio" YAxisName="RatioAxis" EnableTooltip="True" EnableAnimation="True" Fill="#2162af" StrokeWidth="3" Label="Ratio"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -375,11 +361,10 @@
                                     </chart:CategoryAxis>
                                 </chart:SfCartesianChart.XAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries ItemsSource="{Binding TopItems}" XBindingPath="Name" Spacing="0" YBindingPath="{Binding TopItemsMetricPath}" Width="0.7" EnableTooltip="True" Fill="#2fcf75"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding TopItems}" XBindingPath="Name" Spacing="0" YBindingPath="{Binding TopItemsMetricPath}" Width="0.7" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
 
-                            <!-- Toggle buttons -->
                             <HorizontalStackLayout Grid.Row="2" Spacing="10" HorizontalOptions="Center">
                                 <Button Text="Value" Command="{Binding SetTopItemsMetricCommand}" CommandParameter="Value" WidthRequest="100">
                                     <Button.Style>

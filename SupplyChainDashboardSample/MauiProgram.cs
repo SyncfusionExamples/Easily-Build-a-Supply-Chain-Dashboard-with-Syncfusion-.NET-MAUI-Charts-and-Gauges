@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using SupplyChainDashboardSample;
-using SupplyChainDashboardSample.ViewModels;
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.Toolkit.Hosting;
 

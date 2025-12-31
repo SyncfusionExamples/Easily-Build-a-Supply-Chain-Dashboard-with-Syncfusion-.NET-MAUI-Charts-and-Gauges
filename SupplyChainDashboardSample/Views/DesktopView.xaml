@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SupplyChainDashboardSample.DesktopView"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             xmlns:vm="clr-namespace:SupplyChainDashboardSample.ViewModels"
+             xmlns:vm="clr-namespace:SupplyChainDashboardSample"
              xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
              xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
              x:DataType="vm:InventoryDashboardViewModel"
@@ -253,6 +253,7 @@
                                         YBindingPath="Value"
                                         Fill="#2fcf75"
                                         EnableTooltip="True" 
+                                        EnableAnimation="True"
                                         Label="Inventory Value"/>
                                     <chart:SplineSeries 
                                         ItemsSource="{Binding InventoryValueOverTime}" 
@@ -260,6 +261,7 @@
                                         YBindingPath="Change"
                                         Fill="LightGrey"
                                         EnableTooltip="True"
+                                        EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Change"/>
                                 </chart:SfCartesianChart.Series>
@@ -274,14 +276,6 @@
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Turnover (Days) by Month" FontAttributes="Bold"/>
                             <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
-                                <chart:SfCartesianChart.Legend>
-                                    <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
-                                        <chart:ChartLegend.LabelStyle>
-                                            <chart:ChartLegendLabelStyle TextColor="LightGray"/>
-                                        </chart:ChartLegend.LabelStyle>
-                                    </chart:ChartLegend>
-                                </chart:SfCartesianChart.Legend>
-
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
                                         <chart:CategoryAxis.LabelStyle>
@@ -310,6 +304,7 @@
                                         YBindingPath="Value"
                                         Fill="#d4a0e8"
                                         EnableTooltip="True"
+                                        EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Turnover"/>
                                 </chart:SfCartesianChart.Series>
@@ -352,7 +347,8 @@
                                         YBindingPath="{Binding TopItemsMetricPath}"
                                         Width="0.5"
                                         Fill="#2fcf75"
-                                        EnableTooltip="True"/>
+                                        EnableTooltip="True"
+                                        EnableAnimation="True"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
 
@@ -398,14 +394,6 @@
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Inventory Movement" FontAttributes="Bold"/>
                             <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
-                                <chart:SfCartesianChart.Legend>
-                                    <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
-                                        <chart:ChartLegend.LabelStyle>
-                                            <chart:ChartLegendLabelStyle TextColor="LightGray"/>
-                                        </chart:ChartLegend.LabelStyle>
-                                    </chart:ChartLegend>
-                                </chart:SfCartesianChart.Legend>
-
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
                                         <chart:CategoryAxis.LabelStyle>
@@ -434,6 +422,7 @@
                                         YBindingPath="Value"
                                         Fill="#00a67e"
                                         EnableTooltip="True"
+                                        EnableAnimation="True"
                                         NegativePointsBrush="#fb7185"
                                         SummaryPointsBrush="#06b6d4"
                                         SummaryBindingPath="IsSummary"
@@ -492,6 +481,7 @@
                                         YBindingPath="Value"
                                         Fill="#2fcf75"
                                         EnableTooltip="True"
+                                        EnableAnimation="True"
                                         Label="Inventory Value"/>
                                     <chart:ColumnSeries
                                         ItemsSource="{Binding InventoryToSales}"
@@ -499,6 +489,7 @@
                                         YBindingPath="Secondary"
                                         Fill="#ffcf66"
                                         EnableTooltip="True"
+                                        EnableAnimation="True"
                                         Label="Sales Amount"/>
                                     <chart:SplineSeries
                                         ItemsSource="{Binding InventoryToSales}"
@@ -507,6 +498,7 @@
                                         YAxisName="RatioAxis"
                                         Fill="#2162af"
                                         EnableTooltip="True"
+                                        EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Ratio"/>
                                 </chart:SfCartesianChart.Series>
