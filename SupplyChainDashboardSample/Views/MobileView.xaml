@@ -60,7 +60,7 @@
                     <Label VerticalOptions="Center" HorizontalOptions="Start">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="INVENTORY " FontAttributes="Bold" FontSize="18" TextColor="#FFFFFF"/>
+                                <Span Text="Supply Chain Performance " FontAttributes="Bold" FontSize="18" TextColor="#FFFFFF"/>
                                 <Span Text="dashboard" FontSize="18" TextColor="#E5E7EB"/>
                             </FormattedString>
                         </Label.FormattedText>
@@ -78,10 +78,10 @@
                             <Grid WidthRequest="44" BackgroundColor="#2fcf75" HorizontalOptions="Start">
                                 <Path Data="M10.899993,15.602111L10.899993,16.555108C10.135009,16.664108 9.5750111,16.959104 9.2179859,17.442104 8.8630055,17.925094 8.6839893,18.470096 8.6839893,19.074088 8.6839893,19.534084 8.7829884,19.93908 8.9830006,20.287078 9.1829823,20.633077 9.441985,20.90108 9.7609852,21.093072 10.080993,21.289077 10.524993,21.48207 11.093993,21.679075 11.725982,21.903072 12.135009,22.088069 12.316985,22.233064 12.499999,22.377067 12.592009,22.592063 12.592009,22.875066 12.592009,23.148059 12.499999,23.37906 12.316985,23.573058 12.135009,23.766059 11.846984,23.86205 11.458007,23.86205 10.624999,23.86205 10.135009,23.411058 9.9869984,22.511062L8.3890064,22.928067C8.7120045,24.359058,9.548003,25.146055,10.899993,25.285045L10.899993,26.514041 11.933989,26.514041 11.933989,25.279048C12.744994,25.194043 13.364989,24.910049 13.794982,24.429048 14.225005,23.947057 14.438993,23.347062 14.438993,22.626067 14.438993,22.155069 14.33499,21.745069 14.126983,21.393073 13.916991,21.044076 13.639983,20.766078 13.290007,20.568082 12.941985,20.369079 12.458983,20.156081 11.846984,19.932084 11.286986,19.727084 10.923003,19.555087 10.751983,19.417089 10.582,19.277089 10.497008,19.078086 10.497008,18.818094 10.497008,18.562091 10.585997,18.346097 10.762999,18.167096 10.938994,17.987098 11.17401,17.898093 11.464995,17.898093 12.046996,17.898093 12.475005,18.299093 12.751983,19.101089L14.178008,18.516094C13.837981,17.348102,13.087981,16.694106,11.933989,16.556108L11.933989,15.602111z M5.1310113,0.00021808739C5.3169854,-0.0027876735 5.5379937,0.025212017 5.7959893,0.088215038 10.572997,1.2522089 12.318999,4.3981841 14.881986,2.0692048 17.386991,-0.20877995 18.885008,3.3051965 13.837981,9.0121596 17.596006,10.962143 22.828001,16.354106 22.828001,23.729057 22.828001,25.483043 22.527983,26.867036 21.989988,27.964029 21.695005,28.549032 20.928007,29.774015 19.390989,30.635017 17.333006,31.999997 14.520994,31.999997 11.415007,31.999997 8.0499867,31.999997 5.0260003,31.713012 2.9360045,30.341012 1.770996,29.556012 0.9960022,28.242027 0.82800287,27.940027 0.29599005,26.84604 1.084336E-07,25.469051 0,23.729057 1.084336E-07,16.486108 5.0480035,11.154144 8.7890003,9.1181538 7.3290094,7.1251705 2.3389891,0.045216157 5.1310113,0.00021808739z" Fill="White" HeightRequest="34" WidthRequest="30" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Grid>
-                            <Grid Grid.Column="1" Padding="12,8" RowDefinitions="Auto,Auto,Auto" VerticalOptions="Center">
+                            <Grid Grid.Column="1" Padding="12,8" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
                                 <Label Text="INVENTORY VALUE" FontSize="14" TextColor="#9ca3af"/>
-                                <Label Grid.Row="1" Text="{Binding Kpis[0].Value, StringFormat='{}{0:N0}'}" FontSize="20" FontAttributes="Bold" TextColor="#34d399"/>
-                                <Label Grid.Row="2" Text="{Binding Kpis[0].SubText}" FontSize="12" TextColor="#60a5fa"/>
+                                <Label Grid.Row="1" Text="{Binding AnimatedInventoryValue, StringFormat='{}{0:N0}'}" FontSize="20" FontAttributes="Bold" TextColor="#34d399"/>
+                                <Label Grid.Row="2" Text="{Binding AnimatedInventoryChange}" FontSize="12" TextColor="#60a5fa"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -94,10 +94,10 @@
                             <Grid WidthRequest="44" BackgroundColor="#06c3e1" HorizontalOptions="Start">
                                 <Path Data="M22.200012,19.700008L22.200012,27.299984 24.400024,27.299984 24.800049,19.700008z M17.200012,19.700008L17.200012,27.299984 19.400024,27.299984 19.400024,19.700008z M12.400024,19.700008L12.400024,27.299984 14.600037,27.299984 14.600037,19.700008z M7,19.700008L7.5,27.299984 9.7000122,27.299984 9.7000122,19.700008z M1.5,16.999998L30.300049,16.999998 28,30.6 3.7000122,30.6z M0,11.600004L3.7000122,11.600004 3.7000122,11.70001C4,12.799986 5,13.70001 6.3000488,13.70001 7.6000366,13.70001 8.6000366,12.799986 8.9000244,11.70001L8.9000244,11.600004 22.900024,11.600004 22.900024,11.70001C23.200012,12.799986 24.200012,13.70001 25.5,13.70001 26.700012,13.70001 27.800049,12.799986 28.100037,11.70001L28.100037,11.600004 32,11.600004 32,15.299986 0,15.299986z M25.5,9.2999866C26.5,9.2999866 27.300049,10.100005 27.300049,11.100004 27.300049,12.100004 26.5,12.899992 25.5,12.899992 24.5,12.899992 23.700012,12.100004 23.700012,11.100004 23.700012,10.100005 24.5,9.2999866 25.5,9.2999866z M6.3000488,9.2999866C7.3000488,9.2999866 8.1000366,10.100005 8.1000366,11.100004 8.1000366,12.100004 7.3000488,12.899992 6.3000488,12.899992 5.3000488,12.899992 4.5,11.999998 4.5,10.999998 4.5,9.9999988 5.3000488,9.2999866 6.3000488,9.2999866z M18.200012,0.10000611L25.200012,8.3999927C24.5,8.4999988,23.900024,8.7999866,23.400024,9.3999927L23.300049,9.4999988 16.5,1.5z M13.900024,0L15.5,1.2999878 8.5,9.6000049C8.1000366,8.9999988,7.5,8.6000049,6.8000488,8.4999988L6.7000122,8.4999988z" Fill="White" HeightRequest="34" WidthRequest="30" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Grid>
-                            <Grid Grid.Column="1" Padding="12,8" RowDefinitions="Auto,Auto,Auto" VerticalOptions="Center">
+                            <Grid Grid.Column="1" Padding="12,8" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
                                 <Label Text="STOCK AVAILABLE" FontSize="14" TextColor="#9ca3af"/>
-                                <Label Grid.Row="1" Text="{Binding Kpis[1].Value, StringFormat='{}{0:N0}'}" FontSize="20" FontAttributes="Bold" TextColor="#22d3ee"/>
-                                <Label Grid.Row="2" Text="{Binding Kpis[1].SubText}" FontSize="12" TextColor="#60a5fa"/>
+                                <Label Grid.Row="1" Text="{Binding AnimatedStockAvailable, StringFormat='{}{0:N0}'}" FontSize="20" FontAttributes="Bold" TextColor="#22d3ee"/>
+                                <Label Grid.Row="2" Text="{Binding AnimatedStockChange}" FontSize="12" TextColor="#60a5fa"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -111,16 +111,18 @@
                         <Label Text="TURNOVER RATIO" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
                         <gauge:SfRadialGauge Grid.Row="1" HeightRequest="140" BackgroundColor="Transparent">
                             <gauge:SfRadialGauge.Axes>
-                                <gauge:RadialAxis Minimum="0" Maximum="12" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                    <gauge:RadialAxis.Ranges>
-                                        <gauge:RadialRange StartValue="0" EndValue="8" Fill="#d4a0e8" StartWidth="16" EndWidth="16"/>
-                                        <gauge:RadialRange StartValue="8" EndValue="12" Fill="#f3f2f1" StartWidth="16" EndWidth="16"/>
-                                    </gauge:RadialAxis.Ranges>
+                                <gauge:RadialAxis Minimum="{Binding Kpis[0].Min}" Maximum="{Binding Kpis[0].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                    <gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialLineStyle Thickness="20" />
+                                    </gauge:RadialAxis.AxisLineStyle>
+                                    <gauge:RadialAxis.Pointers>
+                                        <gauge:RangePointer Value="{Binding AnimatedInventoryValue}" PointerWidth="20" EnableAnimation="True" Fill="#d4a0e8"/>
+                                    </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                             <gauge:GaugeAnnotation.Content>
                                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding Kpis[2].Value, StringFormat='{}{0:0.00}'}" FontSize="16" FontAttributes="Bold" TextColor="LightGrey"/>
+                                                    <Label Text="{Binding AnimatedTurnoverRatio, StringFormat='{0:0.00}'}" FontSize="16" FontAttributes="Bold" TextColor="LightGrey"/>
                                                 </Grid>
                                             </gauge:GaugeAnnotation.Content>
                                         </gauge:GaugeAnnotation>
@@ -139,16 +141,18 @@
                         <Label Text="INVENTORY TO SALES RATIO" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
                         <gauge:SfRadialGauge Grid.Row="1" HeightRequest="120" BackgroundColor="Transparent">
                             <gauge:SfRadialGauge.Axes>
-                                <gauge:RadialAxis Minimum="0" Maximum="1" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                    <gauge:RadialAxis.Ranges>
-                                        <gauge:RadialRange StartValue="0" EndValue="0.33" Fill="#2772bc" StartWidth="16" EndWidth="16"/>
-                                        <gauge:RadialRange StartValue="0.33" EndValue="1" Fill="#f3f2f1" StartWidth="16" EndWidth="16"/>
-                                    </gauge:RadialAxis.Ranges>
+                                <gauge:RadialAxis Minimum="{Binding Kpis[1].Min}" Maximum="{Binding Kpis[1].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                    <gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialLineStyle Thickness="20" />
+                                    </gauge:RadialAxis.AxisLineStyle>
+                                    <gauge:RadialAxis.Pointers>
+                                        <gauge:RangePointer Value="{Binding AnimatedStockAvailable}" PointerWidth="20" EnableAnimation="True" Fill="#2772bc"/>
+                                    </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                             <gauge:GaugeAnnotation.Content>
                                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding Kpis[3].Value, StringFormat='{}{0:0.00}'}" FontSize="16" FontAttributes="Bold" TextColor="LightGrey"/>
+                                                    <Label Text="{Binding AnimatedInventoryToSalesRatio, StringFormat='{0:0.00}'}" FontSize="16" FontAttributes="Bold" TextColor="LightGrey"/>
                                                 </Grid>
                                             </gauge:GaugeAnnotation.Content>
                                         </gauge:GaugeAnnotation>
@@ -167,16 +171,18 @@
                         <Label Text="AVERAGE INVENTORY DAYS OF SUPPLY" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
                         <gauge:SfRadialGauge Grid.Row="1" HeightRequest="120" BackgroundColor="Transparent">
                             <gauge:SfRadialGauge.Axes>
-                                <gauge:RadialAxis Minimum="0" Maximum="60" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                    <gauge:RadialAxis.Ranges>
-                                        <gauge:RadialRange StartValue="0" EndValue="20" Fill="#ffcf66" StartWidth="16" EndWidth="16"/>
-                                        <gauge:RadialRange StartValue="20" EndValue="60" Fill="#f3f2f1" StartWidth="16" EndWidth="16"/>
-                                    </gauge:RadialAxis.Ranges>
+                                <gauge:RadialAxis Minimum="{Binding Kpis[2].Min}" Maximum="{Binding Kpis[2].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                    <gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialLineStyle Thickness="20" />
+                                    </gauge:RadialAxis.AxisLineStyle>
+                                    <gauge:RadialAxis.Pointers>
+                                        <gauge:RangePointer Value="{Binding AnimatedStockAvailable}" PointerWidth="20" EnableAnimation="True" Fill="#ffcf66"/>
+                                    </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                             <gauge:GaugeAnnotation.Content>
                                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding Kpis[4].Value, StringFormat='{}{0:N0}'}" FontSize="16" FontAttributes="Bold" TextColor="LightGrey"/>
+                                                    <Label Text="{Binding AnimatedAvgDaysOfSupply, StringFormat='{0:0.00}'}" FontSize="16" FontAttributes="Bold" TextColor="LightGrey"/>
                                                 </Grid>
                                             </gauge:GaugeAnnotation.Content>
                                         </gauge:GaugeAnnotation>

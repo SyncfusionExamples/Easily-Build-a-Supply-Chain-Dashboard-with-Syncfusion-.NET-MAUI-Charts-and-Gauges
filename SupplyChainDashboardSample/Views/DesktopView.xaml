@@ -49,7 +49,7 @@
                     <Label VerticalOptions="Center" HorizontalOptions="Start">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="INVENTORY " FontAttributes="Bold" FontSize="22" TextColor="#FFFFFF"/>
+                                <Span Text="Supply Chain Performance " FontAttributes="Bold" FontSize="22" TextColor="#FFFFFF"/>
                                 <Span Text="dashboard" FontSize="22" TextColor="#E5E7EB"/>
                             </FormattedString>
                         </Label.FormattedText>
@@ -75,10 +75,10 @@
                                     HorizontalOptions="Center"/>
                             </Grid>
 
-                            <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto" VerticalOptions="Center">
+                            <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
                                 <Label Text="INVENTORY VALUE" FontSize="16" TextColor="#9ca3af" HorizontalOptions="Start"/>
-                                <Label Grid.Row="1" Text="{Binding Kpis[0].Value, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#34d399" HorizontalOptions="Start"/>
-                                <Label Grid.Row="2" Text="{Binding Kpis[0].SubText}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
+                                <Label Grid.Row="1" Text="{Binding AnimatedInventoryValue, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#34d399" HorizontalOptions="Start"/>
+                                <Label Grid.Row="2" Text="{Binding AnimatedInventoryChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -99,10 +99,10 @@
                                     HorizontalOptions="Center"/>
                             </Grid>
 
-                            <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto" VerticalOptions="Center">
+                            <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
                                 <Label Text="STOCK AVAILABLE" FontSize="16" TextColor="#9ca3af" HorizontalOptions="Start"/>
-                                <Label Grid.Row="1" Text="{Binding Kpis[1].Value, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#22d3ee" HorizontalOptions="Start"/>
-                                <Label Grid.Row="2" Text="{Binding Kpis[1].SubText}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
+                                <Label Grid.Row="1" Text="{Binding AnimatedStockAvailable, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#22d3ee" HorizontalOptions="Start"/>
+                                <Label Grid.Row="2" Text="{Binding AnimatedStockChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -115,16 +115,18 @@
                             <Label Text="TURNOVER RATIO" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
                             <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
                                 <gauge:SfRadialGauge.Axes>
-                                    <gauge:RadialAxis Minimum="0" Maximum="12" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                        <gauge:RadialAxis.Ranges>
-                                            <gauge:RadialRange StartValue="0" EndValue="8" Fill="#d4a0e8" StartWidth="20" EndWidth="20"/>
-                                            <gauge:RadialRange StartValue="8" EndValue="12" Fill="#f3f2f1" StartWidth="20" EndWidth="20"/>
-                                        </gauge:RadialAxis.Ranges>
+                                    <gauge:RadialAxis Minimum="{Binding Kpis[0].Min}" Maximum="{Binding Kpis[0].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                        <gauge:RadialAxis.AxisLineStyle>
+                                            <gauge:RadialLineStyle Thickness="20" />
+                                        </gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialAxis.Pointers>
+                                            <gauge:RangePointer Value="{Binding AnimatedInventoryValue}" PointerWidth="20" EnableAnimation="True" Fill="#d4a0e8"/>
+                                        </gauge:RadialAxis.Pointers>
                                         <gauge:RadialAxis.Annotations>
                                             <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                                 <gauge:GaugeAnnotation.Content>
                                                     <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                        <Label Text="{Binding Kpis[2].Value, StringFormat='{}{0:0.00}'}"
+                                                        <Label Text="{Binding AnimatedTurnoverRatio, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"
@@ -148,16 +150,18 @@
                             <Label Text="INVENTORY TO SALES RATIO" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
                             <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
                                 <gauge:SfRadialGauge.Axes>
-                                    <gauge:RadialAxis Minimum="0" Maximum="1" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                        <gauge:RadialAxis.Ranges>
-                                            <gauge:RadialRange StartValue="0" EndValue="0.33" Fill="#2772bc" StartWidth="20" EndWidth="20"/>
-                                            <gauge:RadialRange StartValue="0.33" EndValue="1" Fill="#f3f2f1" StartWidth="20" EndWidth="20"/>
-                                        </gauge:RadialAxis.Ranges>
+                                    <gauge:RadialAxis Minimum="{Binding Kpis[1].Min}" Maximum="{Binding Kpis[1].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                        <gauge:RadialAxis.AxisLineStyle>
+                                            <gauge:RadialLineStyle Thickness="20" />
+                                        </gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialAxis.Pointers>
+                                            <gauge:RangePointer Value="{Binding AnimatedStockAvailable}" PointerWidth="20" EnableAnimation="True" Fill="#2772bc"/>
+                                        </gauge:RadialAxis.Pointers>
                                         <gauge:RadialAxis.Annotations>
                                             <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                                 <gauge:GaugeAnnotation.Content>
                                                     <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                        <Label Text="{Binding Kpis[3].Value, StringFormat='{}{0:0.00}'}"
+                                                        <Label Text="{Binding AnimatedInventoryToSalesRatio, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"
@@ -181,16 +185,18 @@
                             <Label Text="AVERAGE INVENTORY DAYS OF SUPPLY" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
                             <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
                                 <gauge:SfRadialGauge.Axes>
-                                    <gauge:RadialAxis Minimum="0" Maximum="60" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                        <gauge:RadialAxis.Ranges>
-                                            <gauge:RadialRange StartValue="0" EndValue="20" Fill="#ffcf66" StartWidth="20" EndWidth="20"/>
-                                            <gauge:RadialRange StartValue="20" EndValue="60" Fill="#f3f2f1" StartWidth="20" EndWidth="20"/>
-                                        </gauge:RadialAxis.Ranges>
+                                    <gauge:RadialAxis Minimum="{Binding Kpis[2].Min}" Maximum="{Binding Kpis[2].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                        <gauge:RadialAxis.AxisLineStyle>
+                                            <gauge:RadialLineStyle Thickness="20" />
+                                        </gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialAxis.Pointers>
+                                            <gauge:RangePointer Value="{Binding AnimatedStockAvailable}" PointerWidth="20" EnableAnimation="True" Fill="#ffcf66"/>
+                                        </gauge:RadialAxis.Pointers>
                                         <gauge:RadialAxis.Annotations>
                                             <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                                 <gauge:GaugeAnnotation.Content>
                                                     <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                        <Label Text="{Binding Kpis[4].Value, StringFormat='{}{0:N0}'}"
+                                                        <Label Text="{Binding AnimatedAvgDaysOfSupply, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"

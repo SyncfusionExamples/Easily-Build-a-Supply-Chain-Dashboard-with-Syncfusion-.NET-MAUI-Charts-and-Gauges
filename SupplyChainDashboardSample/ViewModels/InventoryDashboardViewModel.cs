@@ -14,6 +14,29 @@ namespace SupplyChainDashboardSample
     {
         private readonly Random _rand = new Random();
         private IDispatcherTimer? _timer;
+        private IDispatcherTimer? _invTweenTimer;
+        private IDispatcherTimer? _stockTweenTimer;
+
+        private double _animatedInventoryValue;
+        public double AnimatedInventoryValue { get => _animatedInventoryValue; private set => Set(ref _animatedInventoryValue, value); }
+
+        private string _animatedInventoryChange;
+        public string AnimatedInventoryChange { get => _animatedInventoryChange; private set => Set(ref _animatedInventoryChange, value); }
+
+        private double _animatedStockAvailable;
+        public double AnimatedStockAvailable { get => _animatedStockAvailable; private set => Set(ref _animatedStockAvailable, value); }
+
+        private string _animatedStockChange; 
+        public string AnimatedStockChange { get => _animatedStockChange; private set => Set(ref _animatedStockChange, value); }
+
+        private double _animatedTurnoverRatio;
+        public double AnimatedTurnoverRatio { get => _animatedTurnoverRatio; private set => Set(ref _animatedTurnoverRatio, value); }
+
+        private double _animatedInventoryToSalesRatio;
+        public double AnimatedInventoryToSalesRatio { get => _animatedInventoryToSalesRatio; private set => Set(ref _animatedInventoryToSalesRatio, value); }
+
+        private double _animatedAvgDaysOfSupply; 
+        public double AnimatedAvgDaysOfSupply { get => _animatedAvgDaysOfSupply; private set => Set(ref _animatedAvgDaysOfSupply, value); }
 
         public InventoryDashboardViewModel()
         {
@@ -21,6 +44,17 @@ namespace SupplyChainDashboardSample
             {
                 TopItemsMetricPath = (p == "Quantity") ? "Quantity" : "Amount";
             });
+
+            if (Kpis.Count >= 5)
+            {
+                AnimatedInventoryValue = Kpis[0].Value;
+                AnimatedInventoryChange = Kpis[0].SubText;
+                AnimatedStockAvailable = Kpis[1].Value;
+                AnimatedStockChange = Kpis[1].SubText;
+                AnimatedTurnoverRatio = Kpis[2].Value; 
+                AnimatedInventoryToSalesRatio = Kpis[3].Value; 
+                AnimatedAvgDaysOfSupply = Kpis[4].Value;
+            }
         }
 
         /// <summary>
@@ -49,7 +83,7 @@ namespace SupplyChainDashboardSample
             new InventoryKpi{ Title = "STOCK AVAILABLE", Value = 3790813, SubText = "Change: 58,778", Min=0, Max=6000000},
             new InventoryKpi{ Title = "TURNOVER RATIO", Value = 9.13, SubText = string.Empty, Min=0, Max=12},
             new InventoryKpi{ Title = "INV. TO SALES RATIO", Value = 0.44, SubText = string.Empty, Min=0, Max=1},
-            new InventoryKpi{ Title = "AVG. DAYS OF SUPPLY", Value = 39.98, SubText = string.Empty, Min=0, Max=60},
+            new InventoryKpi{ Title = "AVG. DAYS OF SUPPLY", Value = 39, SubText = string.Empty, Min=0, Max=60},
         };
 
         /// <summary>
@@ -96,10 +130,22 @@ namespace SupplyChainDashboardSample
 
         public void StopLiveUpdates()
         {
-            if (_timer == null) return;
-            _timer.Tick -= OnTick;
-            _timer.Stop();
-            _timer = null;
+            if (_timer != null)
+            {
+                _timer.Tick -= OnTick;
+                _timer.Stop();
+                _timer = null;
+            }
+            if (_invTweenTimer != null)
+            {
+                _invTweenTimer.Stop();
+                _invTweenTimer = null;
+            }
+            if (_stockTweenTimer != null)
+            {
+                _stockTweenTimer.Stop();
+                _stockTweenTimer = null;
+            }
         }
 
         private void OnTick(object? sender, EventArgs e) => UpdateData();
@@ -111,20 +157,31 @@ namespace SupplyChainDashboardSample
             {
                 var delta = NextRange(-250_000, 250_000);
                 var v = Clamp(k.Value + delta, k.Min, k.Max);
-                return new InventoryKpi { Title = k.Title, Value = v, SubText = $"Change: {Math.Abs(delta):N0}", Min = k.Min, Max = k.Max };
+
+                if (_invTweenTimer != null) { _invTweenTimer.Stop(); _invTweenTimer = null; }
+                _invTweenTimer = CreateTweenTimer(AnimatedInventoryValue, v, x => AnimatedInventoryValue = x);
+
+                AnimatedInventoryChange = $"Change: {Math.Abs(delta):N0}";
+                return new InventoryKpi { Title = k.Title, Value = v, SubText = AnimatedInventoryChange, Min = k.Min, Max = k.Max };
             });
 
             ReplaceKpi(1, k =>
             {
                 var delta = NextRange(-45_000, 45_000);
                 var v = Clamp(k.Value + delta, k.Min, k.Max);
-                return new InventoryKpi { Title = k.Title, Value = v, SubText = $"Change: {Math.Abs(delta):N0}", Min = k.Min, Max = k.Max };
+
+                if (_stockTweenTimer != null) { _stockTweenTimer.Stop(); _stockTweenTimer = null; }
+                _stockTweenTimer = CreateTweenTimer(AnimatedStockAvailable, v, x => AnimatedStockAvailable = x);
+
+                AnimatedStockChange = $"Change: {Math.Abs(delta):N0}";
+                return new InventoryKpi { Title = k.Title, Value = v, SubText = AnimatedStockChange, Min = k.Min, Max = k.Max };
             });
 
             ReplaceKpi(2, k =>
             {
                 var delta = NextRangeDouble(-0.25, 0.25);
                 var v = Clamp(k.Value + delta, k.Min, k.Max);
+                AnimatedTurnoverRatio = v;
                 return new InventoryKpi { Title = k.Title, Value = v, SubText = string.Empty, Min = k.Min, Max = k.Max };
             });
 
@@ -132,6 +189,7 @@ namespace SupplyChainDashboardSample
             {
                 var delta = NextRangeDouble(-0.02, 0.02);
                 var v = Clamp(k.Value + delta, k.Min, k.Max);
+                AnimatedInventoryToSalesRatio = v;
                 return new InventoryKpi { Title = k.Title, Value = v, SubText = string.Empty, Min = k.Min, Max = k.Max };
             });
 
@@ -139,6 +197,7 @@ namespace SupplyChainDashboardSample
             {
                 var delta = NextRangeDouble(-1.5, 1.5);
                 var v = Clamp(k.Value + delta, k.Min, k.Max);
+                AnimatedAvgDaysOfSupply = v;
                 return new InventoryKpi { Title = k.Title, Value = v, SubText = string.Empty, Min = k.Min, Max = k.Max };
             });
 
@@ -201,6 +260,36 @@ namespace SupplyChainDashboardSample
             if (index < 0 || index >= Kpis.Count) return;
             var updated = updater(Kpis[index]);
             Kpis[index] = updated;
+        }
+
+        private IDispatcherTimer? CreateTweenTimer(double from, double to, Action<double> setter)
+        {
+            if (Application.Current == null)
+            {
+                setter(to);
+                return null;
+            }
+
+            var duration = TimeSpan.FromMilliseconds(700);
+            var start = DateTime.UtcNow;
+            var tmr = Application.Current.Dispatcher.CreateTimer();
+            tmr.Interval = TimeSpan.FromMilliseconds(16); // ~60 fps
+            tmr.Tick += (s, e) =>
+            {
+                var elapsed = DateTime.UtcNow - start;
+                var t = elapsed.TotalMilliseconds / duration.TotalMilliseconds;
+                if (t >= 1)
+                {
+                    setter(to);
+                    tmr.Stop();
+                    return;
+                }
+                var eased = 1 - Math.Pow(1 - t, 3);
+                var value = from + (to - from) * eased;
+                setter(value);
+            };
+            tmr.Start();
+            return tmr;
         }
     }
 }
