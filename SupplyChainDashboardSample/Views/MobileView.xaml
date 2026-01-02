@@ -111,12 +111,12 @@
                         <Label Text="TURNOVER RATIO" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
                         <gauge:SfRadialGauge Grid.Row="1" HeightRequest="140" BackgroundColor="Transparent">
                             <gauge:SfRadialGauge.Axes>
-                                <gauge:RadialAxis Minimum="{Binding Kpis[0].Min}" Maximum="{Binding Kpis[0].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                <gauge:RadialAxis Minimum="0" Maximum="12" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
                                     <gauge:RadialAxis.AxisLineStyle>
                                         <gauge:RadialLineStyle Thickness="20" />
                                     </gauge:RadialAxis.AxisLineStyle>
                                     <gauge:RadialAxis.Pointers>
-                                        <gauge:RangePointer Value="{Binding AnimatedInventoryValue}" PointerWidth="20" EnableAnimation="True" Fill="#d4a0e8"/>
+                                        <gauge:RangePointer Value="{Binding AnimatedTurnoverRatio}" PointerWidth="20" EnableAnimation="True" Fill="#d4a0e8"/>
                                     </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
@@ -141,12 +141,12 @@
                         <Label Text="INVENTORY TO SALES RATIO" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
                         <gauge:SfRadialGauge Grid.Row="1" HeightRequest="120" BackgroundColor="Transparent">
                             <gauge:SfRadialGauge.Axes>
-                                <gauge:RadialAxis Minimum="{Binding Kpis[1].Min}" Maximum="{Binding Kpis[1].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                <gauge:RadialAxis Minimum="0" Maximum="1" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
                                     <gauge:RadialAxis.AxisLineStyle>
                                         <gauge:RadialLineStyle Thickness="20" />
                                     </gauge:RadialAxis.AxisLineStyle>
                                     <gauge:RadialAxis.Pointers>
-                                        <gauge:RangePointer Value="{Binding AnimatedStockAvailable}" PointerWidth="20" EnableAnimation="True" Fill="#2772bc"/>
+                                        <gauge:RangePointer Value="{Binding AnimatedInventoryToSalesRatio}" PointerWidth="20" EnableAnimation="True" Fill="#2772bc"/>
                                     </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
@@ -171,12 +171,12 @@
                         <Label Text="AVERAGE INVENTORY DAYS OF SUPPLY" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
                         <gauge:SfRadialGauge Grid.Row="1" HeightRequest="120" BackgroundColor="Transparent">
                             <gauge:SfRadialGauge.Axes>
-                                <gauge:RadialAxis Minimum="{Binding Kpis[2].Min}" Maximum="{Binding Kpis[2].Max}" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                <gauge:RadialAxis Minimum="0" Maximum="60" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
                                     <gauge:RadialAxis.AxisLineStyle>
                                         <gauge:RadialLineStyle Thickness="20" />
                                     </gauge:RadialAxis.AxisLineStyle>
                                     <gauge:RadialAxis.Pointers>
-                                        <gauge:RangePointer Value="{Binding AnimatedStockAvailable}" PointerWidth="20" EnableAnimation="True" Fill="#ffcf66"/>
+                                        <gauge:RangePointer Value="{Binding AnimatedAvgDaysOfSupply}" PointerWidth="20" EnableAnimation="True" Fill="#ffcf66"/>
                                     </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
@@ -211,11 +211,11 @@
                                     </chart:ChartLegend>
                                 </chart:SfCartesianChart.Legend>
                                 <chart:SfCartesianChart.XAxes>
-                                    <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
-                                        <chart:CategoryAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:CategoryAxis.LabelStyle>
-                                    </chart:CategoryAxis>
+                                <chart:DateTimeAxis TickPosition="Inside" ShowMajorGridLines="False" IntervalType="Hours">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:DateTimeAxis.LabelStyle>
+                                </chart:DateTimeAxis>
                                 </chart:SfCartesianChart.XAxes>
                                 <chart:SfCartesianChart.YAxes>
                                     <chart:NumericalAxis Minimum="0" Maximum="100" Interval="50" TickPosition="Inside">
@@ -228,8 +228,8 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries ItemsSource="{Binding InventoryValueOverTime}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75" Label="Inventory Value"/>
-                                    <chart:SplineSeries ItemsSource="{Binding InventoryValueOverTime}" XBindingPath="Month" YBindingPath="Change" EnableTooltip="True" EnableAnimation="True" Fill="LightGrey" StrokeWidth="3" Label="Change"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding Snapshots}" XBindingPath="Timestamp" YBindingPath="InventoryOverTimeValue" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75" Label="Inventory Value"/>
+                                    <chart:SplineSeries ItemsSource="{Binding Snapshots}" XBindingPath="Timestamp" YBindingPath="InventoryValueOverTimeChange" EnableTooltip="True" EnableAnimation="True" Fill="LightGrey" StrokeWidth="3" Label="Change"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -240,14 +240,14 @@
                             <RoundRectangle CornerRadius="12"/>
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
-                            <Label Text="Turnover (Days) by Month" FontAttributes="Bold"/>
+                            <Label Text="Turnover (Days) by Hour" FontAttributes="Bold"/>
                             <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
                                 <chart:SfCartesianChart.XAxes>
-                                    <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
-                                        <chart:CategoryAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:CategoryAxis.LabelStyle>
-                                    </chart:CategoryAxis>
+                                <chart:DateTimeAxis TickPosition="Inside" ShowMajorGridLines="False" IntervalType="Hours">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:DateTimeAxis.LabelStyle>
+                                </chart:DateTimeAxis>
                                 </chart:SfCartesianChart.XAxes>
                                 <chart:SfCartesianChart.YAxes>
                                     <chart:NumericalAxis Minimum="0" Maximum="70" Interval="20" TickPosition="Inside">
@@ -260,7 +260,7 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:SplineSeries ItemsSource="{Binding TurnoverDays}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" EnableAnimation="True" Fill="#d4a0e8" StrokeWidth="3" Label="Turnover"/>
+                                    <chart:SplineSeries ItemsSource="{Binding Snapshots}" XBindingPath="Timestamp" YBindingPath="TurnoverHoursValue" EnableTooltip="True" EnableAnimation="True" Fill="#d4a0e8" StrokeWidth="3" Label="Turnover"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -291,7 +291,7 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:WaterfallSeries ItemsSource="{Binding InventoryMovement}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" EnableAnimation="True" Fill="#00a67e" NegativePointsBrush="#fb7185" SummaryPointsBrush="#06b6d4" SummaryBindingPath="IsSummary" Label="Increase"/>
+                                    <chart:WaterfallSeries ItemsSource="{Binding InventoryMovement}" XBindingPath="MovementType" YBindingPath="MovementValue" EnableTooltip="True" EnableAnimation="True" Fill="#00a67e" NegativePointsBrush="#fb7185" SummaryPointsBrush="#06b6d4" SummaryBindingPath="IsSummary" Label="Movement"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -334,9 +334,9 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Value" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75" Label="Inventory Value"/>
-                                    <chart:ColumnSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Secondary" EnableTooltip="True" EnableAnimation="True" Fill="#ffcf66" Label="Sales Amount"/>
-                                    <chart:SplineSeries ItemsSource="{Binding InventoryToSales}" XBindingPath="Month" YBindingPath="Ratio" YAxisName="RatioAxis" EnableTooltip="True" EnableAnimation="True" Fill="#2162af" StrokeWidth="3" Label="Ratio"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding Snapshots}" XBindingPath="Timestamp" YBindingPath="InventoryOverTimeValue" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75" Label="Inventory Value"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding Snapshots}" XBindingPath="Timestamp" YBindingPath="SalesAmount" EnableTooltip="True" EnableAnimation="True" Fill="#ffcf66" Label="Sales Amount"/>
+                                    <chart:SplineSeries ItemsSource="{Binding Snapshots}" XBindingPath="Timestamp" YBindingPath="InventorySalesRatio" YAxisName="RatioAxis" EnableTooltip="True" EnableAnimation="True" Fill="#2162af" StrokeWidth="3" Label="Ratio"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -367,7 +367,7 @@
                                     </chart:CategoryAxis>
                                 </chart:SfCartesianChart.XAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries ItemsSource="{Binding TopItems}" XBindingPath="Name" Spacing="0" YBindingPath="{Binding TopItemsMetricPath}" Width="0.7" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding TopItems}" XBindingPath="ItemName" Spacing="0" YBindingPath="{Binding TopItemsMetricPath}" Width="0.7" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
 
@@ -379,7 +379,7 @@
                                             <Setter Property="TextColor" Value="#e5e7eb"/>
                                             <Setter Property="CornerRadius" Value="20"/>
                                             <Style.Triggers>
-                                                <DataTrigger TargetType="Button" Binding="{Binding TopItemsMetricPath}" Value="Amount">
+                                                <DataTrigger TargetType="Button" Binding="{Binding TopItemsMetricPath}" Value="Value">
                                                     <Setter Property="BackgroundColor" Value="#2fcf75"/>
                                                     <Setter Property="TextColor" Value="Black"/>
                                                 </DataTrigger>
