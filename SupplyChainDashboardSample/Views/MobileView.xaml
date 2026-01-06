@@ -60,8 +60,7 @@
                     <Label VerticalOptions="Center" HorizontalOptions="Start">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Supply Chain Performance " FontAttributes="Bold" FontSize="18" TextColor="#FFFFFF"/>
-                                <Span Text="dashboard" FontSize="18" TextColor="#E5E7EB"/>
+                                <Span Text="SmartStock Warehouse Supply Chain" FontAttributes="Bold" FontSize="18" TextColor="#FFFFFF"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -211,7 +210,7 @@
                                     </chart:ChartLegend>
                                 </chart:SfCartesianChart.Legend>
                                 <chart:SfCartesianChart.XAxes>
-                                <chart:DateTimeAxis TickPosition="Inside" ShowMajorGridLines="False" IntervalType="Hours">
+                                <chart:DateTimeAxis LabelCreated="Primary_LabelCreated" TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="12">
                                     <chart:DateTimeAxis.LabelStyle>
                                         <chart:ChartAxisLabelStyle TextColor="LightGray"/>
                                     </chart:DateTimeAxis.LabelStyle>
@@ -243,7 +242,7 @@
                             <Label Text="Turnover (Days) by Hour" FontAttributes="Bold"/>
                             <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
                                 <chart:SfCartesianChart.XAxes>
-                                <chart:DateTimeAxis TickPosition="Inside" ShowMajorGridLines="False" IntervalType="Hours">
+                                <chart:DateTimeAxis LabelCreated="Primary_LabelCreated" TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="12">
                                     <chart:DateTimeAxis.LabelStyle>
                                         <chart:ChartAxisLabelStyle TextColor="LightGray"/>
                                     </chart:DateTimeAxis.LabelStyle>
@@ -312,11 +311,11 @@
                                     </chart:ChartLegend>
                                 </chart:SfCartesianChart.Legend>
                                 <chart:SfCartesianChart.XAxes>
-                                    <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
-                                        <chart:CategoryAxis.LabelStyle>
+                                    <chart:DateTimeAxis LabelCreated="Primary_LabelCreated" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="12" TickPosition="Inside" ShowMajorGridLines="False">
+                                        <chart:DateTimeAxis.LabelStyle>
                                             <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:CategoryAxis.LabelStyle>
-                                    </chart:CategoryAxis>
+                                        </chart:DateTimeAxis.LabelStyle>
+                                    </chart:DateTimeAxis>
                                 </chart:SfCartesianChart.XAxes>
                                 <chart:SfCartesianChart.YAxes>
                                     <chart:NumericalAxis Minimum="0" Maximum="100" Interval="50" TickPosition="Inside">
