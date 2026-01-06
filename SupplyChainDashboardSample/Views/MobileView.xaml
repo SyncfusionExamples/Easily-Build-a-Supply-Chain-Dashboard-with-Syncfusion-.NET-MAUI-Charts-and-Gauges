@@ -201,7 +201,7 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Inventory Value Over Time" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
+                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350">
                                 <chart:SfCartesianChart.Legend>
                                     <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
                                         <chart:ChartLegend.LabelStyle>
@@ -240,7 +240,7 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Turnover (Days) by Hour" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
+                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350">
                                 <chart:SfCartesianChart.XAxes>
                                 <chart:DateTimeAxis LabelCreated="Primary_LabelCreated" TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="12">
                                     <chart:DateTimeAxis.LabelStyle>
@@ -271,7 +271,7 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Inventory Movement" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
+                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350">
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
                                         <chart:CategoryAxis.LabelStyle>
@@ -302,7 +302,7 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Inventory to Sales Analysis" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="220">
+                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350">
                                 <chart:SfCartesianChart.Legend>
                                     <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
                                         <chart:ChartLegend.LabelStyle>
@@ -347,7 +347,7 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*,Auto">
                             <Label Text="Top 10 Items Based on Value" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" IsTransposed="True" HeightRequest="360">
+                            <chart:SfCartesianChart Grid.Row="1" IsTransposed="True" HeightRequest="360" Margin="0,10,0,0">
                                 <chart:SfCartesianChart.YAxes>
                                     <chart:NumericalAxis TickPosition="Inside" ShowMajorGridLines="False" ShowMinorGridLines="False">
                                         <chart:NumericalAxis.LabelStyle>
@@ -366,7 +366,7 @@
                                     </chart:CategoryAxis>
                                 </chart:SfCartesianChart.XAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries ItemsSource="{Binding TopItems}" XBindingPath="ItemName" Spacing="0" YBindingPath="{Binding TopItemsMetricPath}" Width="0.7" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75"/>
+                                    <chart:ColumnSeries ItemsSource="{Binding TopItems}" XBindingPath="ItemName" Spacing="0" YBindingPath="{Binding TopItemsMetricPath}" Width="0.5" EnableTooltip="True" EnableAnimation="True" Fill="#2fcf75"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
 
