@@ -12,19 +12,21 @@ namespace SupplyChainDashboardSample
     public class InventoryDashboardViewModel : INotifyPropertyChanged
     {
         /// <summary>
-        /// Backing flag used to stop the periodic timer loop.
-        /// </summary>
-        private bool _canStopTimer;
-        
-        /// <summary>
         /// Tracks the latest generated timestamp for snapshots.
         /// </summary>
-        private DateTime _currentTime;
+        private DateTime Date;
+
+        private int count;
 
         /// <summary>
         /// Random generator used for seeding demo data.
         /// </summary>
-        private readonly Random _random = new();
+        private readonly Random random = new();
+
+        /// <summary>
+        /// Backing flag used to stop the periodic timer loop.
+        /// </summary>
+        private bool canStopTimer;
 
         private double _animatedInventoryValue;
         /// <summary>
@@ -124,28 +126,17 @@ namespace SupplyChainDashboardSample
                 TopItemsMetricPath = (p == "Quantity") ? nameof(TopItem.Quantity) : nameof(TopItem.Value);
             });
 
-            SeedTopItems();
-            InitializeSnapshots();
-        }
-
-        /// <summary>
-        /// Generates a daily series of KPI snapshots and updates the latest KPI cards.
-        /// </summary>
-        private void InitializeSnapshots()
-        {
-            Snapshots.Clear();
-
-            var baseDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 9, 0, 0);
-            for (int i = 0; i < 12; i++)
-            {
-                var timestamp = baseDate.AddHours(i);
-                Snapshots.Add(CreateRandomSnapshot(timestamp));
-            }
-
-            if (Snapshots.Count > 0)
-            {
-                UpdateKpis(Snapshots[^1]);
-            }
+            // Top 10 Items based on value and quantity
+            TopItems.Add(new TopItem { Code = "C100006", ItemName = "C100006 - Cherry Finished Crystal Model", Value = 14, Quantity = 156000 });
+            TopItems.Add(new TopItem { Code = "C100011", ItemName = "C100011 - Winter Frost Vase", Value = 13, Quantity = 143000 });
+            TopItems.Add(new TopItem { Code = "C100055", ItemName = "C100055 - Silver Plated Photo Frame", Value = 12, Quantity = 132000 });
+            TopItems.Add(new TopItem { Code = "C100009", ItemName = "C100009 - Normandy Vase", Value = 12, Quantity = 120000 });
+            TopItems.Add(new TopItem { Code = "C100010", ItemName = "C100010 - Wisper-Cut Vase", Value = 12, Quantity = 118000 });
+            TopItems.Add(new TopItem { Code = "C100040", ItemName = "C100040 - Channel Speaker System", Value = 9, Quantity = 95000 });
+            TopItems.Add(new TopItem { Code = "C100004", ItemName = "C100004 - Walnut Medallion Plate", Value = 8, Quantity = 84000 });
+            TopItems.Add(new TopItem { Code = "C100005", ItemName = "C100005 - Cherry Finished Crystal Bowl", Value = 8, Quantity = 82000 });
+            TopItems.Add(new TopItem { Code = "C100003", ItemName = "C100003 - Cherry Finish Frame", Value = 8, Quantity = 81000 });
+            TopItems.Add(new TopItem { Code = "C100051", ItemName = "C100051 - Bamboo Digital Picture Frame", Value = 8, Quantity = 79000 });
         }
 
         /// <summary>
@@ -154,27 +145,23 @@ namespace SupplyChainDashboardSample
         /// </summary>
         /// <param name="timestamp">The base timestamp used to generate the snapshot.</param>
         /// <returns>A populated <see cref="KpiSnapshot"/> instance.</returns>
-        private KpiSnapshot CreateRandomSnapshot(DateTime timestamp)
+        private KpiSnapshot SeedSnapshot(DateTime timestamp)
         {
-            var inventoryValue = Math.Round(_random.NextDouble() * (21000000 - 20000000) + 20000000);
-            var inventoryChange = Math.Round(_random.NextDouble() * (2500000 - 1000000) + 1000000);
-            var stockAvailableValue = Math.Round(_random.NextDouble() * (3900000 - 3700000) + 3700000);
-            var stockAvailableChange = Math.Round(_random.NextDouble() * (60000 - 40000) + 40000);
-            var turnoverRatio = Math.Round(_random.NextDouble() * (9.5 - 8.5) + 8.5, 2);
-            var inventoryToSalesRatio = Math.Round(_random.NextDouble() * (0.5 - 0.4) + 0.4, 2);
-            var avgInventoryDaysOfSupply = _random.Next(35, 43);
-            var inventoryOverTimeValue = _random.Next(80, 120);
-            var inventoryValueOverTimeChange = _random.Next(2, 26);
-            var turnoverHoursValue = _random.Next(30, 55);
-            var salesAmount = _random.Next(80, 90);
-            var inventorySalesRatio = Math.Round(_random.NextDouble() * (5.5 - 4.5) + 4.5, 2);
-            var increase = _random.Next(60, 70); 
-            var decrease = -_random.Next(54, 57); 
-            var total = increase + decrease;
-
+            var inventoryValue = Math.Round(random.NextDouble() * (21000000 - 20000000) + 20000000);
+            var inventoryChange = Math.Round(random.NextDouble() * (2500000 - 1000000) + 1000000);
+            var stockAvailableValue = Math.Round(random.NextDouble() * (3900000 - 3700000) + 3700000);
+            var stockAvailableChange = Math.Round(random.NextDouble() * (60000 - 40000) + 40000);
+            var turnoverRatio = Math.Round(random.NextDouble() * (9.5 - 8.5) + 8.5, 2);
+            var inventoryToSalesRatio = Math.Round(random.NextDouble() * (0.5 - 0.4) + 0.4, 2);
+            var avgInventoryDaysOfSupply = random.Next(35, 43);
+            var inventoryOverTimeValue = random.Next(80, 120);
+            var inventoryValueOverTimeChange = random.Next(2, 26);
+            var turnoverHoursValue = random.Next(30, 55);
+            var salesAmount = random.Next(80, 90);
+            var inventorySalesRatio = Math.Round(random.NextDouble() * (5.5 - 4.5) + 4.5, 2);
             var snapshot = new KpiSnapshot
             {
-                Timestamp = timestamp.AddHours(1),
+                Timestamp = timestamp,
                 InventoryValue = inventoryValue,
                 InventoryChange = $"Change: {inventoryChange:N0}",
                 StockAvailableValue = stockAvailableValue,
@@ -189,12 +176,32 @@ namespace SupplyChainDashboardSample
                 InventorySalesRatio = inventorySalesRatio
             };
 
+            return snapshot;
+        }
+
+        private bool UpdateVerticalData()
+        {
+            if (canStopTimer) return false;
+
+            Date = Date.Add(TimeSpan.FromSeconds(1));
+            Snapshots.Add(SeedSnapshot(Date));
+            UpdateKpis(SeedSnapshot(Date));
+            SeedInventoryMovement();
+            count = count + 1;
+            return true;
+        }
+
+        private void SeedInventoryMovement()
+        {
             InventoryMovement.Clear();
+            
+            int increase = random.Next(55, 60);
+            int decrease = -random.Next(45, 50);
+            int total = increase + decrease;
+
             InventoryMovement.Add(new InventoryMovement { MovementType = "Increase", MovementValue = increase, IsSummary = false });
             InventoryMovement.Add(new InventoryMovement { MovementType = "Decrease", MovementValue = decrease, IsSummary = false });
             InventoryMovement.Add(new InventoryMovement { MovementType = "Total", MovementValue = total, IsSummary = true });
-
-            return snapshot;
         }
 
         /// <summary>
@@ -213,51 +220,25 @@ namespace SupplyChainDashboardSample
         }
 
         /// <summary>
-        /// Seeds the <see cref="TopItems"/> collection with sample data.
-        /// </summary>
-        private void SeedTopItems()
-        {
-            TopItems.Clear();
-            TopItems.Add(new TopItem { Code = "C100006", ItemName = "C100006 - Cherry Finished Crystal Model", Value = 14, Quantity = 156000 });
-            TopItems.Add(new TopItem { Code = "C100011", ItemName = "C100011 - Winter Frost Vase", Value = 13, Quantity = 143000 });
-            TopItems.Add(new TopItem { Code = "C100055", ItemName = "C100055 - Silver Plated Photo Frame", Value = 12, Quantity = 132000 });
-            TopItems.Add(new TopItem { Code = "C100009", ItemName = "C100009 - Normandy Vase", Value = 12, Quantity = 120000 });
-            TopItems.Add(new TopItem { Code = "C100010", ItemName = "C100010 - Wisper-Cut Vase", Value = 12, Quantity = 118000 });
-            TopItems.Add(new TopItem { Code = "C100040", ItemName = "C100040 - Channel Speaker System", Value = 9, Quantity = 95000 });
-            TopItems.Add(new TopItem { Code = "C100004", ItemName = "C100004 - Walnut Medallion Plate", Value = 8, Quantity = 84000 });
-            TopItems.Add(new TopItem { Code = "C100005", ItemName = "C100005 - Cherry Finished Crystal Bowl", Value = 8, Quantity = 82000 });
-            TopItems.Add(new TopItem { Code = "C100003", ItemName = "C100003 - Cherry Finish Frame", Value = 8, Quantity = 81000 });
-            TopItems.Add(new TopItem { Code = "C100051", ItemName = "C100051 - Bamboo Digital Picture Frame", Value = 8, Quantity = 79000 });
-        }
-
-        /// <summary>
         /// Starts a repeating timer that appends new random snapshots and updates the KPI cards.
         /// </summary>
         public void StartTimer()
         {
             Snapshots.Clear();
-            _currentTime = DateTime.Today.AddHours(9);
 
-            for (int i = 0; i < 3; i++)
-            {
-                Snapshots.Add(CreateRandomSnapshot(_currentTime));
-                _currentTime = _currentTime.AddHours(1);
-            }
+            Date = new DateTime(2026, 1, 1, 01, 00, 00);
 
-            _canStopTimer = false;
+            Snapshots.Add(SeedSnapshot(Date));
+            Snapshots.Add(SeedSnapshot(Date.Add(TimeSpan.FromSeconds(1))));
+            Snapshots.Add(SeedSnapshot(Date.Add(TimeSpan.FromSeconds(2))));
+            SeedInventoryMovement();
+            Date = Date.Add(TimeSpan.FromSeconds(2));
 
-            Application.Current?.Dispatcher.StartTimer(
-                TimeSpan.FromSeconds(0.5),
-                () =>
-                {
-                    if (_canStopTimer) return false;
+            canStopTimer = false;
+            count = 1;
 
-                    _currentTime = _currentTime.AddHours(1);
-                    Snapshots.Add(CreateRandomSnapshot(_currentTime));
-
-                    UpdateKpis(Snapshots[^1]);
-                    return true;
-                });
+            if (Application.Current != null)
+                Application.Current.Dispatcher.StartTimer(new TimeSpan(0, 0, 0, 0, 500), UpdateVerticalData);
         }
 
         /// <summary>
@@ -265,7 +246,8 @@ namespace SupplyChainDashboardSample
         /// </summary>
         public void StopTimer()
         {
-            _canStopTimer = true;
+            canStopTimer = true;
+            count = 1;
         }
     }
 }

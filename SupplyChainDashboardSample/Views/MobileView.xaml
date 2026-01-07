@@ -33,7 +33,7 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <vm:InventoryDashboardViewModel/>
+        <vm:InventoryDashboardViewModel x:Name="InventoryDashboardViewModel"/>
     </ContentPage.BindingContext>
 
     <ScrollView>
@@ -201,7 +201,7 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Inventory Value Over Time" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350">
+                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350" x:Name="inventoryValueChart">
                                 <chart:SfCartesianChart.Legend>
                                     <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
                                         <chart:ChartLegend.LabelStyle>
@@ -210,7 +210,7 @@
                                     </chart:ChartLegend>
                                 </chart:SfCartesianChart.Legend>
                                 <chart:SfCartesianChart.XAxes>
-                                <chart:DateTimeAxis LabelCreated="Primary_LabelCreated" TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="12">
+                                <chart:DateTimeAxis  TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="6">
                                     <chart:DateTimeAxis.LabelStyle>
                                         <chart:ChartAxisLabelStyle TextColor="LightGray"/>
                                     </chart:DateTimeAxis.LabelStyle>
@@ -240,9 +240,9 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Turnover (Days) by Hour" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350">
+                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350" x:Name="turnoverChart">
                                 <chart:SfCartesianChart.XAxes>
-                                <chart:DateTimeAxis LabelCreated="Primary_LabelCreated" TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="12">
+                                <chart:DateTimeAxis  TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="6">
                                     <chart:DateTimeAxis.LabelStyle>
                                         <chart:ChartAxisLabelStyle TextColor="LightGray"/>
                                     </chart:DateTimeAxis.LabelStyle>
@@ -271,7 +271,7 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Inventory Movement" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350">
+                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350" x:Name="inventoryMovementChart">
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
                                         <chart:CategoryAxis.LabelStyle>
@@ -290,7 +290,7 @@
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.Series>
-                                    <chart:WaterfallSeries ItemsSource="{Binding InventoryMovement}" XBindingPath="MovementType" YBindingPath="MovementValue" EnableTooltip="True" EnableAnimation="True" Fill="#00a67e" NegativePointsBrush="#fb7185" SummaryPointsBrush="#06b6d4" SummaryBindingPath="IsSummary" Label="Movement"/>
+                                    <chart:WaterfallSeries ItemsSource="{Binding InventoryMovement}" XBindingPath="MovementType" YBindingPath="MovementValue" EnableTooltip="True" EnableAnimation="True" Fill="#00a67e" NegativePointsBrush="#fb7185" SummaryPointsBrush="RoyalBlue" SummaryBindingPath="IsSummary" Label="Movement"/>
                                 </chart:SfCartesianChart.Series>
                             </chart:SfCartesianChart>
                         </Grid>
@@ -302,7 +302,7 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto,*">
                             <Label Text="Inventory to Sales Analysis" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350">
+                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="350" x:Name="salesChart">
                                 <chart:SfCartesianChart.Legend>
                                     <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
                                         <chart:ChartLegend.LabelStyle>
@@ -311,7 +311,7 @@
                                     </chart:ChartLegend>
                                 </chart:SfCartesianChart.Legend>
                                 <chart:SfCartesianChart.XAxes>
-                                    <chart:DateTimeAxis LabelCreated="Primary_LabelCreated" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="12" TickPosition="Inside" ShowMajorGridLines="False">
+                                    <chart:DateTimeAxis  Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="6" TickPosition="Inside" ShowMajorGridLines="False">
                                         <chart:DateTimeAxis.LabelStyle>
                                             <chart:ChartAxisLabelStyle TextColor="LightGray"/>
                                         </chart:DateTimeAxis.LabelStyle>
