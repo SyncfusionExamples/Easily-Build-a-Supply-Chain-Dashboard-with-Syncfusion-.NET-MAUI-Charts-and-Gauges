@@ -16,6 +16,10 @@ namespace SupplyChainDashboardSample
         /// </summary>
         private DateTime Date;
 
+        /// <summary>
+        /// Maintains the number of update cycles executed by the timer,
+        /// used to track progression of seeded snapshots.
+        /// </summary>
         private int count;
 
         /// <summary>
@@ -179,6 +183,14 @@ namespace SupplyChainDashboardSample
             return snapshot;
         }
 
+        /// <summary> 
+        /// Periodic update routine invoked by the dispatcher timer. 
+        /// Advances the timestamp, appends a new KPI snapshot, 
+        /// refreshes animated KPI values, and reseeds inventory movement data. 
+        /// </summary> 
+        /// <returns> 
+        /// True while the timer should continue running; false when stopped. 
+        /// </returns>
         private bool UpdateVerticalData()
         {
             if (canStopTimer) return false;
@@ -191,6 +203,11 @@ namespace SupplyChainDashboardSample
             return true;
         }
 
+        /// <summary> 
+        /// Clears and repopulates the <see cref="InventoryMovement"/> collection 
+        /// with randomized Increase, Decrease, and Total values 
+        /// for waterfall chart visualization. 
+        /// </summary>
         private void SeedInventoryMovement()
         {
             InventoryMovement.Clear();
