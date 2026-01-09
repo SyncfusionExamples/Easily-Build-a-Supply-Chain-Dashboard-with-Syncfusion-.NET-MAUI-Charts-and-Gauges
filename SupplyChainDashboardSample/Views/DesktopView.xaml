@@ -23,8 +23,8 @@
         <vm:InventoryDashboardViewModel x:Name="InventoryDashboardViewModel"/>
     </ContentPage.BindingContext>
 
-    <ScrollView>
-        <Grid Padding="8,20,8,0" RowSpacing="10" ColumnSpacing="10" RowDefinitions="Auto,Auto,*" ColumnDefinitions="*">
+    <ScrollView Orientation="Both">
+        <Grid Padding="8,20,8,0" RowSpacing="10" ColumnSpacing="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*">
             <Border Grid.Row="0" Padding="10" StrokeThickness="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="12"/>
@@ -56,203 +56,200 @@
                 </HorizontalStackLayout>
             </Border>
 
-            <ScrollView Grid.Row="1" Orientation="Horizontal">
-                <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="16">
-                    <Border Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="0" WidthRequest="280">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="16">
+                <Border Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="0" WidthRequest="280">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
 
-                        <Grid ColumnDefinitions="Auto,*">
-                            <Grid WidthRequest="60" BackgroundColor="#2fcf75" HorizontalOptions="Start">
-                                <Path
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Grid WidthRequest="60" BackgroundColor="#2fcf75" HorizontalOptions="Start">
+                            <Path
                                     Data="M10.899993,15.602111L10.899993,16.555108C10.135009,16.664108 9.5750111,16.959104 9.2179859,17.442104 8.8630055,17.925094 8.6839893,18.470096 8.6839893,19.074088 8.6839893,19.534084 8.7829884,19.93908 8.9830006,20.287078 9.1829823,20.633077 9.441985,20.90108 9.7609852,21.093072 10.080993,21.289077 10.524993,21.48207 11.093993,21.679075 11.725982,21.903072 12.135009,22.088069 12.316985,22.233064 12.499999,22.377067 12.592009,22.592063 12.592009,22.875066 12.592009,23.148059 12.499999,23.37906 12.316985,23.573058 12.135009,23.766059 11.846984,23.86205 11.458007,23.86205 10.624999,23.86205 10.135009,23.411058 9.9869984,22.511062L8.3890064,22.928067C8.7120045,24.359058,9.548003,25.146055,10.899993,25.285045L10.899993,26.514041 11.933989,26.514041 11.933989,25.279048C12.744994,25.194043 13.364989,24.910049 13.794982,24.429048 14.225005,23.947057 14.438993,23.347062 14.438993,22.626067 14.438993,22.155069 14.33499,21.745069 14.126983,21.393073 13.916991,21.044076 13.639983,20.766078 13.290007,20.568082 12.941985,20.369079 12.458983,20.156081 11.846984,19.932084 11.286986,19.727084 10.923003,19.555087 10.751983,19.417089 10.582,19.277089 10.497008,19.078086 10.497008,18.818094 10.497008,18.562091 10.585997,18.346097 10.762999,18.167096 10.938994,17.987098 11.17401,17.898093 11.464995,17.898093 12.046996,17.898093 12.475005,18.299093 12.751983,19.101089L14.178008,18.516094C13.837981,17.348102,13.087981,16.694106,11.933989,16.556108L11.933989,15.602111z M5.1310113,0.00021808739C5.3169854,-0.0027876735 5.5379937,0.025212017 5.7959893,0.088215038 10.572997,1.2522089 12.318999,4.3981841 14.881986,2.0692048 17.386991,-0.20877995 18.885008,3.3051965 13.837981,9.0121596 17.596006,10.962143 22.828001,16.354106 22.828001,23.729057 22.828001,25.483043 22.527983,26.867036 21.989988,27.964029 21.695005,28.549032 20.928007,29.774015 19.390989,30.635017 17.333006,31.751998 14.520994,31.999997 11.415007,31.999997 8.0499867,31.999997 5.0260003,31.713012 2.9360045,30.341012 1.770996,29.556012 0.9960022,28.242027 0.82800287,27.940027 0.29599005,26.84604 1.084336E-07,25.469051 0,23.729057 1.084336E-07,16.486108 5.0480035,11.154144 8.7890003,9.1181538 7.3290094,7.1251705 2.3389891,0.045216157 5.1310113,0.00021808739z"
                                     Fill="White"
                                     HeightRequest="32"
                                     WidthRequest="32"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>
-                            </Grid>
-
-                            <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
-                                <Label Text="INVENTORY VALUE" FontSize="16" TextColor="#9ca3af" HorizontalOptions="Start"/>
-                                <Label Grid.Row="1" Text="{Binding AnimatedInventoryValue, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#34d399" HorizontalOptions="Start"/>
-                                <Label Grid.Row="2" Text="{Binding AnimatedInventoryChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
-                            </Grid>
                         </Grid>
-                    </Border>
 
-                    <Border Grid.Column="1" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="0" WidthRequest="280">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
+                        <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
+                            <Label Text="INVENTORY VALUE" FontSize="16" TextColor="#9ca3af" HorizontalOptions="Start"/>
+                            <Label Grid.Row="1" Text="{Binding AnimatedInventoryValue, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#34d399" HorizontalOptions="Start"/>
+                            <Label Grid.Row="2" Text="{Binding AnimatedInventoryChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
+                        </Grid>
+                    </Grid>
+                </Border>
 
-                        <Grid ColumnDefinitions="Auto,*">
-                            <Grid WidthRequest="60" BackgroundColor="#06c3e1" HorizontalOptions="Start">
-                                <Path
+                <Border Grid.Column="1" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="0" WidthRequest="280">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Grid WidthRequest="60" BackgroundColor="#06c3e1" HorizontalOptions="Start">
+                            <Path
                                     Data="M22.200012,19.700008L22.200012,27.299984 24.400024,27.299984 24.800049,19.700008z M17.200012,19.700008L17.200012,27.299984 19.400024,27.299984 19.400024,19.700008z M12.400024,19.700008L12.400024,27.299984 14.600037,27.299984 14.600037,19.700008z M7,19.700008L7.5,27.299984 9.7000122,27.299984 9.7000122,19.700008z M1.5,16.999998L30.300049,16.999998 28,30.6 3.7000122,30.6z M0,11.600004L3.7000122,11.600004 3.7000122,11.70001C4,12.799986 5,13.70001 6.3000488,13.70001 7.6000366,13.70001 8.6000366,12.799986 8.9000244,11.70001L8.9000244,11.600004 22.900024,11.600004 22.900024,11.70001C23.200012,12.799986 24.200012,13.70001 25.5,13.70001 26.700012,13.70001 27.800049,12.799986 28.100037,11.70001L28.100037,11.600004 32,11.600004 32,15.299986 0,15.299986z M25.5,9.2999866C26.5,9.2999866 27.300049,10.100005 27.300049,11.100004 27.300049,12.100004 26.5,12.899992 25.5,12.899992 24.5,12.899992 23.700012,12.100004 23.700012,11.100004 23.700012,10.100005 24.5,9.2999866 25.5,9.2999866z M6.3000488,9.2999866C7.3000488,9.2999866 8.1000366,10.100005 8.1000366,11.100004 8.1000366,12.100004 7.3000488,12.899992 6.3000488,12.899992 5.3000488,12.899992 4.5,11.999998 4.5,10.999998 4.5,9.9999988 5.3000488,9.2999866 6.3000488,9.2999866z M18.200012,0.10000611L25.200012,8.3999927C24.5,8.4999988,23.900024,8.7999866,23.400024,9.3999927L23.300049,9.4999988 16.5,1.5z M13.900024,0L15.5,1.2999878 8.5,9.6000049C8.1000366,8.9999988,7.5,8.6000049,6.8000488,8.4999988L6.7000122,8.4999988z"
                                     Fill="White"
                                     HeightRequest="32"
                                     WidthRequest="32"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>
-                            </Grid>
-
-                            <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
-                                <Label Text="STOCK AVAILABLE" FontSize="16" TextColor="#9ca3af" HorizontalOptions="Start"/>
-                                <Label Grid.Row="1" Text="{Binding AnimatedStockAvailable, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#22d3ee" HorizontalOptions="Start"/>
-                                <Label Grid.Row="2" Text="{Binding AnimatedStockChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
-                            </Grid>
                         </Grid>
-                    </Border>
 
-                    <Border Grid.Column="2" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="12" WidthRequest="300">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="*">
-                            <Label Text="TURNOVER RATIO" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
-                            <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
-                                <gauge:SfRadialGauge.Axes>
-                                    <gauge:RadialAxis Minimum="0" Maximum="12" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                        <gauge:RadialAxis.AxisLineStyle>
-                                            <gauge:RadialLineStyle Thickness="20" />
-                                        </gauge:RadialAxis.AxisLineStyle>
-                                        <gauge:RadialAxis.Pointers>
-                                            <gauge:RangePointer Value="{Binding AnimatedTurnoverRatio}" PointerWidth="20" EnableAnimation="True" Fill="#d4a0e8"/>
-                                        </gauge:RadialAxis.Pointers>
-                                        <gauge:RadialAxis.Annotations>
-                                            <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
-                                                <gauge:GaugeAnnotation.Content>
-                                                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                        <Label Text="{Binding AnimatedTurnoverRatio, StringFormat='{0:0.00}'}"
+                        <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
+                            <Label Text="STOCK AVAILABLE" FontSize="16" TextColor="#9ca3af" HorizontalOptions="Start"/>
+                            <Label Grid.Row="1" Text="{Binding AnimatedStockAvailable, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#22d3ee" HorizontalOptions="Start"/>
+                            <Label Grid.Row="2" Text="{Binding AnimatedStockChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="2" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="12" WidthRequest="300">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="*">
+                        <Label Text="TURNOVER RATIO" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
+                        <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
+                            <gauge:SfRadialGauge.Axes>
+                                <gauge:RadialAxis Minimum="0" Maximum="12" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                    <gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialLineStyle Thickness="20" />
+                                    </gauge:RadialAxis.AxisLineStyle>
+                                    <gauge:RadialAxis.Pointers>
+                                        <gauge:RangePointer Value="{Binding AnimatedTurnoverRatio}" PointerWidth="20" EnableAnimation="True" Fill="#d4a0e8"/>
+                                    </gauge:RadialAxis.Pointers>
+                                    <gauge:RadialAxis.Annotations>
+                                        <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
+                                            <gauge:GaugeAnnotation.Content>
+                                                <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                                    <Label Text="{Binding AnimatedTurnoverRatio, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"
                                                            HorizontalOptions="Center"
                                                            VerticalOptions="Center"/>
-                                                    </Grid>
-                                                </gauge:GaugeAnnotation.Content>
-                                            </gauge:GaugeAnnotation>
-                                        </gauge:RadialAxis.Annotations>
-                                    </gauge:RadialAxis>
-                                </gauge:SfRadialGauge.Axes>
-                            </gauge:SfRadialGauge>
-                        </Grid>
-                    </Border>
+                                                </Grid>
+                                            </gauge:GaugeAnnotation.Content>
+                                        </gauge:GaugeAnnotation>
+                                    </gauge:RadialAxis.Annotations>
+                                </gauge:RadialAxis>
+                            </gauge:SfRadialGauge.Axes>
+                        </gauge:SfRadialGauge>
+                    </Grid>
+                </Border>
 
-                    <Border Grid.Column="3" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="12" WidthRequest="295">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="*">
-                            <Label Text="INVENTORY TO SALES RATIO" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
-                            <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
-                                <gauge:SfRadialGauge.Axes>
-                                    <gauge:RadialAxis Minimum="0" Maximum="1" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                        <gauge:RadialAxis.AxisLineStyle>
-                                            <gauge:RadialLineStyle Thickness="20" />
-                                        </gauge:RadialAxis.AxisLineStyle>
-                                        <gauge:RadialAxis.Pointers>
-                                            <gauge:RangePointer Value="{Binding AnimatedInventoryToSalesRatio}" PointerWidth="20" EnableAnimation="True" Fill="#2772bc"/>
-                                        </gauge:RadialAxis.Pointers>
-                                        <gauge:RadialAxis.Annotations>
-                                            <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
-                                                <gauge:GaugeAnnotation.Content>
-                                                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                        <Label Text="{Binding AnimatedInventoryToSalesRatio, StringFormat='{0:0.00}'}"
+                <Border Grid.Column="3" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="12" WidthRequest="295">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="*">
+                        <Label Text="INVENTORY TO SALES RATIO" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
+                        <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
+                            <gauge:SfRadialGauge.Axes>
+                                <gauge:RadialAxis Minimum="0" Maximum="1" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                    <gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialLineStyle Thickness="20" />
+                                    </gauge:RadialAxis.AxisLineStyle>
+                                    <gauge:RadialAxis.Pointers>
+                                        <gauge:RangePointer Value="{Binding AnimatedInventoryToSalesRatio}" PointerWidth="20" EnableAnimation="True" Fill="#2772bc"/>
+                                    </gauge:RadialAxis.Pointers>
+                                    <gauge:RadialAxis.Annotations>
+                                        <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
+                                            <gauge:GaugeAnnotation.Content>
+                                                <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                                    <Label Text="{Binding AnimatedInventoryToSalesRatio, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"
                                                            HorizontalOptions="Center"
                                                            VerticalOptions="Center"/>
-                                                    </Grid>
-                                                </gauge:GaugeAnnotation.Content>
-                                            </gauge:GaugeAnnotation>
-                                        </gauge:RadialAxis.Annotations>
-                                    </gauge:RadialAxis>
-                                </gauge:SfRadialGauge.Axes>
-                            </gauge:SfRadialGauge>
-                        </Grid>
-                    </Border>
+                                                </Grid>
+                                            </gauge:GaugeAnnotation.Content>
+                                        </gauge:GaugeAnnotation>
+                                    </gauge:RadialAxis.Annotations>
+                                </gauge:RadialAxis>
+                            </gauge:SfRadialGauge.Axes>
+                        </gauge:SfRadialGauge>
+                    </Grid>
+                </Border>
 
-                    <Border Grid.Column="4" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="12" WidthRequest="300">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="*">
-                            <Label Text="AVERAGE INVENTORY DAYS OF SUPPLY" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
-                            <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
-                                <gauge:SfRadialGauge.Axes>
-                                    <gauge:RadialAxis Minimum="0" Maximum="60" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                        <gauge:RadialAxis.AxisLineStyle>
-                                            <gauge:RadialLineStyle Thickness="20" />
-                                        </gauge:RadialAxis.AxisLineStyle>
-                                        <gauge:RadialAxis.Pointers>
-                                            <gauge:RangePointer Value="{Binding AnimatedAvgDaysOfSupply}" PointerWidth="20" EnableAnimation="True" Fill="#ffcf66"/>
-                                        </gauge:RadialAxis.Pointers>
-                                        <gauge:RadialAxis.Annotations>
-                                            <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
-                                                <gauge:GaugeAnnotation.Content>
-                                                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                        <Label Text="{Binding AnimatedAvgDaysOfSupply, StringFormat='{0:0.00}'}"
+                <Border Grid.Column="4" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="12" WidthRequest="300">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="*">
+                        <Label Text="AVERAGE INVENTORY DAYS OF SUPPLY" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
+                        <gauge:SfRadialGauge Grid.Row="1" HeightRequest="110" BackgroundColor="Transparent">
+                            <gauge:SfRadialGauge.Axes>
+                                <gauge:RadialAxis Minimum="0" Maximum="60" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                    <gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialLineStyle Thickness="20" />
+                                    </gauge:RadialAxis.AxisLineStyle>
+                                    <gauge:RadialAxis.Pointers>
+                                        <gauge:RangePointer Value="{Binding AnimatedAvgDaysOfSupply}" PointerWidth="20" EnableAnimation="True" Fill="#ffcf66"/>
+                                    </gauge:RadialAxis.Pointers>
+                                    <gauge:RadialAxis.Annotations>
+                                        <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
+                                            <gauge:GaugeAnnotation.Content>
+                                                <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                                    <Label Text="{Binding AnimatedAvgDaysOfSupply, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"
                                                            HorizontalOptions="Center"
                                                            VerticalOptions="Center"/>
-                                                    </Grid>
-                                                </gauge:GaugeAnnotation.Content>
-                                            </gauge:GaugeAnnotation>
-                                        </gauge:RadialAxis.Annotations>
-                                    </gauge:RadialAxis>
-                                </gauge:SfRadialGauge.Axes>
-                            </gauge:SfRadialGauge>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </ScrollView>
+                                                </Grid>
+                                            </gauge:GaugeAnnotation.Content>
+                                        </gauge:GaugeAnnotation>
+                                    </gauge:RadialAxis.Annotations>
+                                </gauge:RadialAxis>
+                            </gauge:SfRadialGauge.Axes>
+                        </gauge:SfRadialGauge>
+                    </Grid>
+                </Border>
+            </Grid>
 
-            <ScrollView Grid.Row="2" Orientation="Horizontal">
-                <Grid RowSpacing="10" ColumnSpacing="10" ColumnDefinitions="1.5*,1.5*,2*" RowDefinitions="Auto,Auto,Auto">
-                    <Border Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="Auto,*">
-                            <Label Text="Inventory Value Over Time" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="220" x:Name="inventoryValueChart">
-                                <chart:SfCartesianChart.Legend>
-                                    <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
-                                        <chart:ChartLegend.LabelStyle>
-                                            <chart:ChartLegendLabelStyle TextColor="LightGray"/>
-                                        </chart:ChartLegend.LabelStyle>
-                                    </chart:ChartLegend>
-                                </chart:SfCartesianChart.Legend>
+            <Grid Grid.Row="2" RowSpacing="10" ColumnSpacing="10" ColumnDefinitions="1.5*,1.5*,2*" RowDefinitions="Auto,Auto,Auto">
+                <Border Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="Auto,*">
+                        <Label Text="Inventory Value Over Time" FontAttributes="Bold"/>
+                        <chart:SfCartesianChart Grid.Row="1" HeightRequest="220" x:Name="inventoryValueChart">
+                            <chart:SfCartesianChart.Legend>
+                                <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
+                                    <chart:ChartLegend.LabelStyle>
+                                        <chart:ChartLegendLabelStyle TextColor="LightGray"/>
+                                    </chart:ChartLegend.LabelStyle>
+                                </chart:ChartLegend>
+                            </chart:SfCartesianChart.Legend>
 
-                                <chart:SfCartesianChart.XAxes>
-                                    <chart:DateTimeAxis   Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12" TickPosition="Inside" ShowMajorGridLines="False">
-                                        <chart:DateTimeAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:DateTimeAxis.LabelStyle>
-                                    </chart:DateTimeAxis>
-                                </chart:SfCartesianChart.XAxes>
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:DateTimeAxis   Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12" TickPosition="Inside" ShowMajorGridLines="False">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:DateTimeAxis.LabelStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfCartesianChart.XAxes>
 
-                                <chart:SfCartesianChart.YAxes>
-                                    <chart:NumericalAxis Minimum="0" Maximum="100" Interval="50" TickPosition="Inside">
-                                        <chart:NumericalAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle  TextColor="LightGray"/>
-                                        </chart:NumericalAxis.LabelStyle>
-                                        <chart:NumericalAxis.MajorGridLineStyle>
-                                            <chart:ChartLineStyle 
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis Minimum="0" Maximum="100" Interval="50" TickPosition="Inside">
+                                    <chart:NumericalAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle  TextColor="LightGray"/>
+                                    </chart:NumericalAxis.LabelStyle>
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle 
                                                 StrokeDashArray="2,4"
                                                 Stroke="LightGray"
                                                 StrokeWidth="1"/>
-                                        </chart:NumericalAxis.MajorGridLineStyle>
-                                    </chart:NumericalAxis>
-                                </chart:SfCartesianChart.YAxes>
-                                <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries 
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
+                            <chart:SfCartesianChart.Series>
+                                <chart:ColumnSeries 
                                         ItemsSource="{Binding Snapshots}" 
                                         XBindingPath="Timestamp" 
                                         YBindingPath="InventoryOverTimeValue"
@@ -260,7 +257,7 @@
                                         EnableTooltip="True" 
                                         EnableAnimation="True"
                                         Label="Inventory Value"/>
-                                    <chart:SplineSeries 
+                                <chart:SplineSeries 
                                         ItemsSource="{Binding Snapshots}" 
                                         XBindingPath="Timestamp" 
                                         YBindingPath="InventoryValueOverTimeChange"
@@ -269,41 +266,41 @@
                                         EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Change"/>
-                                </chart:SfCartesianChart.Series>
-                            </chart:SfCartesianChart>
-                        </Grid>
-                    </Border>
+                            </chart:SfCartesianChart.Series>
+                        </chart:SfCartesianChart>
+                    </Grid>
+                </Border>
 
-                    <Border Grid.Column="1" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="Auto,*">
-                            <Label Text="Turnover (Days) by Hour" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="185" x:Name="turnoverChart" Margin="0,40,0,0">
-                                <chart:SfCartesianChart.XAxes>
-                                    <chart:DateTimeAxis  Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12" TickPosition="Inside" ShowMajorGridLines="False">
-                                        <chart:DateTimeAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:DateTimeAxis.LabelStyle>
-                                    </chart:DateTimeAxis>
-                                </chart:SfCartesianChart.XAxes>
+                <Border Grid.Column="1" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="Auto,*">
+                        <Label Text="Turnover (Days) by Hour" FontAttributes="Bold"/>
+                        <chart:SfCartesianChart Grid.Row="1" HeightRequest="185" x:Name="turnoverChart" Margin="0,40,0,0">
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:DateTimeAxis  Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12" TickPosition="Inside" ShowMajorGridLines="False">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:DateTimeAxis.LabelStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfCartesianChart.XAxes>
 
-                                <chart:SfCartesianChart.YAxes>
-                                    <chart:NumericalAxis Minimum="0" Interval="20" Maximum="60" TickPosition="Inside">
-                                        <chart:NumericalAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle  TextColor="LightGray"/>
-                                        </chart:NumericalAxis.LabelStyle>
-                                        <chart:NumericalAxis.MajorGridLineStyle>
-                                            <chart:ChartLineStyle 
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis Minimum="0" Interval="20" Maximum="60" TickPosition="Inside">
+                                    <chart:NumericalAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle  TextColor="LightGray"/>
+                                    </chart:NumericalAxis.LabelStyle>
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle 
                                                 StrokeDashArray="2,4"
                                                 Stroke="LightGray"
                                                 StrokeWidth="1"/>
-                                        </chart:NumericalAxis.MajorGridLineStyle>
-                                    </chart:NumericalAxis>
-                                </chart:SfCartesianChart.YAxes>
-                                <chart:SfCartesianChart.Series>
-                                    <chart:SplineSeries 
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
+                            <chart:SfCartesianChart.Series>
+                                <chart:SplineSeries 
                                         ItemsSource="{Binding Snapshots}" 
                                         XBindingPath="Timestamp" 
                                         YBindingPath="TurnoverHoursValue"
@@ -312,41 +309,41 @@
                                         EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Turnover"/>
-                                </chart:SfCartesianChart.Series>
-                            </chart:SfCartesianChart>
-                        </Grid>
-                    </Border>
+                            </chart:SfCartesianChart.Series>
+                        </chart:SfCartesianChart>
+                    </Grid>
+                </Border>
 
-                    <Border Grid.Column="2" Grid.RowSpan="2" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="Auto,*,Auto">
-                            <Label Text="Top 10 Items Based on Value" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" IsTransposed="True" HeightRequest="390">
-                                <chart:SfCartesianChart.YAxes>
-                                    <chart:NumericalAxis TickPosition="Inside" ShowMajorGridLines="False" ShowMinorGridLines="False">
-                                        <chart:NumericalAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:NumericalAxis.LabelStyle>
-                                    </chart:NumericalAxis>
-                                </chart:SfCartesianChart.YAxes>
+                <Border Grid.Column="2" Grid.RowSpan="2" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <Label Text="Top 10 Items Based on Value" FontAttributes="Bold"/>
+                        <chart:SfCartesianChart Grid.Row="1" IsTransposed="True" HeightRequest="390">
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis TickPosition="Inside" ShowMajorGridLines="False" ShowMinorGridLines="False">
+                                    <chart:NumericalAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:NumericalAxis.LabelStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
 
-                                <chart:SfCartesianChart.XAxes>
-                                    <chart:CategoryAxis ShowMajorGridLines="False" TickPosition="Inside">
-                                        <chart:CategoryAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:CategoryAxis.LabelStyle>
-                                        <chart:CategoryAxis.MajorGridLineStyle>
-                                            <chart:ChartLineStyle 
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:CategoryAxis ShowMajorGridLines="False" TickPosition="Inside">
+                                    <chart:CategoryAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:CategoryAxis.LabelStyle>
+                                    <chart:CategoryAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle 
                                                 StrokeDashArray="2,4"
                                                 Stroke="LightGray"
                                                 StrokeWidth="1"/>
-                                        </chart:CategoryAxis.MajorGridLineStyle>
-                                    </chart:CategoryAxis>
-                                </chart:SfCartesianChart.XAxes>
-                                <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries 
+                                    </chart:CategoryAxis.MajorGridLineStyle>
+                                </chart:CategoryAxis>
+                            </chart:SfCartesianChart.XAxes>
+                            <chart:SfCartesianChart.Series>
+                                <chart:ColumnSeries 
                                         ItemsSource="{Binding TopItems}" 
                                         XBindingPath="ItemName" 
                                         YBindingPath="{Binding TopItemsMetricPath}"
@@ -354,74 +351,74 @@
                                         Fill="#2fcf75"
                                         EnableTooltip="True"
                                         EnableAnimation="True"/>
-                                </chart:SfCartesianChart.Series>
-                            </chart:SfCartesianChart>
+                            </chart:SfCartesianChart.Series>
+                        </chart:SfCartesianChart>
 
-                            <HorizontalStackLayout Grid.Row="2" Spacing="10" HorizontalOptions="Center">
-                                <Button Text="Value" Command="{Binding SetTopItemsMetricCommand}" CommandParameter="Value" WidthRequest="100">
-                                    <Button.Style>
-                                        <Style TargetType="Button">
-                                            <Setter Property="BackgroundColor" Value="#1f2937"/>
-                                            <Setter Property="TextColor" Value="#e5e7eb"/>
-                                            <Setter Property="CornerRadius" Value="20"/>
-                                            <Style.Triggers>
-                                                <DataTrigger TargetType="Button" Binding="{Binding TopItemsMetricPath}" Value="Value">
-                                                    <Setter Property="BackgroundColor" Value="#2fcf75"/>
-                                                    <Setter Property="TextColor" Value="Black"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-                                <Button Text="Quantity" Command="{Binding SetTopItemsMetricCommand}" CommandParameter="Quantity" WidthRequest="100">
-                                    <Button.Style>
-                                        <Style TargetType="Button">
-                                            <Setter Property="BackgroundColor" Value="#1f2937"/>
-                                            <Setter Property="TextColor" Value="#e5e7eb"/>
-                                            <Setter Property="CornerRadius" Value="20"/>
-                                            <Style.Triggers>
-                                                <DataTrigger TargetType="Button" Binding="{Binding TopItemsMetricPath}" Value="Quantity">
-                                                    <Setter Property="BackgroundColor" Value="#2fcf75"/>
-                                                    <Setter Property="TextColor" Value="Black"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-                            </HorizontalStackLayout>
-                        </Grid>
-                    </Border>
+                        <HorizontalStackLayout Grid.Row="2" Spacing="10" HorizontalOptions="Center">
+                            <Button Text="Value" Command="{Binding SetTopItemsMetricCommand}" CommandParameter="Value" WidthRequest="100">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BackgroundColor" Value="#1f2937"/>
+                                        <Setter Property="TextColor" Value="#e5e7eb"/>
+                                        <Setter Property="CornerRadius" Value="20"/>
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TopItemsMetricPath}" Value="Value">
+                                                <Setter Property="BackgroundColor" Value="#2fcf75"/>
+                                                <Setter Property="TextColor" Value="Black"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Text="Quantity" Command="{Binding SetTopItemsMetricCommand}" CommandParameter="Quantity" WidthRequest="100">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BackgroundColor" Value="#1f2937"/>
+                                        <Setter Property="TextColor" Value="#e5e7eb"/>
+                                        <Setter Property="CornerRadius" Value="20"/>
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TopItemsMetricPath}" Value="Quantity">
+                                                <Setter Property="BackgroundColor" Value="#2fcf75"/>
+                                                <Setter Property="TextColor" Value="Black"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Border>
 
-                    <Border Grid.Row="1" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="Auto,*">
-                            <Label Text="Inventory Movement" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="185" x:Name="inventoryMovementChart" Margin="0,40,0,0">
-                                <chart:SfCartesianChart.XAxes>
-                                    <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
-                                        <chart:CategoryAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:CategoryAxis.LabelStyle>
-                                    </chart:CategoryAxis>
-                                </chart:SfCartesianChart.XAxes>
+                <Border Grid.Row="1" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="Auto,*">
+                        <Label Text="Inventory Movement" FontAttributes="Bold"/>
+                        <chart:SfCartesianChart Grid.Row="1" HeightRequest="185" x:Name="inventoryMovementChart" Margin="0,40,0,0">
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:CategoryAxis TickPosition="Inside" ShowMajorGridLines="False">
+                                    <chart:CategoryAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:CategoryAxis.LabelStyle>
+                                </chart:CategoryAxis>
+                            </chart:SfCartesianChart.XAxes>
 
-                                <chart:SfCartesianChart.YAxes>
-                                    <chart:NumericalAxis Minimum="0" Maximum="60" Interval="20" TickPosition="Inside">
-                                        <chart:NumericalAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:NumericalAxis.LabelStyle>
-                                        <chart:NumericalAxis.MajorGridLineStyle>
-                                            <chart:ChartLineStyle 
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis Minimum="0" Maximum="60" Interval="20" TickPosition="Inside">
+                                    <chart:NumericalAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:NumericalAxis.LabelStyle>
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle 
                                                 StrokeDashArray="2,4"
                                                 Stroke="LightGray"
                                                 StrokeWidth="1"/>
-                                        </chart:NumericalAxis.MajorGridLineStyle>
-                                    </chart:NumericalAxis>
-                                </chart:SfCartesianChart.YAxes>
-                                <chart:SfCartesianChart.Series>
-                                    <chart:WaterfallSeries 
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
+                            <chart:SfCartesianChart.Series>
+                                <chart:WaterfallSeries 
                                         ItemsSource="{Binding InventoryMovement}" 
                                         XBindingPath="MovementType" 
                                         YBindingPath="MovementValue"
@@ -432,55 +429,55 @@
                                         SummaryPointsBrush="RoyalBlue"
                                         SummaryBindingPath="IsSummary"
                                         Label="Movement">
-                                    </chart:WaterfallSeries>
-                                </chart:SfCartesianChart.Series>
-                            </chart:SfCartesianChart>
-                        </Grid>
-                    </Border>
+                                </chart:WaterfallSeries>
+                            </chart:SfCartesianChart.Series>
+                        </chart:SfCartesianChart>
+                    </Grid>
+                </Border>
 
-                    <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="12"/>
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="Auto,*">
-                            <Label Text="Inventory to Sales Analysis" FontAttributes="Bold"/>
-                            <chart:SfCartesianChart Grid.Row="1" HeightRequest="220" x:Name="salesChart">
-                                <chart:SfCartesianChart.Legend>
-                                    <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
-                                        <chart:ChartLegend.LabelStyle>
-                                            <chart:ChartLegendLabelStyle TextColor="LightGray"/>
-                                        </chart:ChartLegend.LabelStyle>
-                                    </chart:ChartLegend>
-                                </chart:SfCartesianChart.Legend>
+                <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Panel}" Stroke="{StaticResource PanelStroke}" StrokeThickness="2" Padding="8">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="Auto,*">
+                        <Label Text="Inventory to Sales Analysis" FontAttributes="Bold"/>
+                        <chart:SfCartesianChart Grid.Row="1" HeightRequest="220" x:Name="salesChart">
+                            <chart:SfCartesianChart.Legend>
+                                <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Top">
+                                    <chart:ChartLegend.LabelStyle>
+                                        <chart:ChartLegendLabelStyle TextColor="LightGray"/>
+                                    </chart:ChartLegend.LabelStyle>
+                                </chart:ChartLegend>
+                            </chart:SfCartesianChart.Legend>
 
-                                <chart:SfCartesianChart.XAxes>
-                                    <chart:DateTimeAxis  TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12">
-                                        <chart:DateTimeAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:DateTimeAxis.LabelStyle>
-                                    </chart:DateTimeAxis>
-                                </chart:SfCartesianChart.XAxes>
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:DateTimeAxis  TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:DateTimeAxis.LabelStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfCartesianChart.XAxes>
 
-                                <chart:SfCartesianChart.YAxes>
-                                    <chart:NumericalAxis Minimum="0" Maximum="100" Interval="50" TickPosition="Inside">
-                                        <chart:NumericalAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:NumericalAxis.LabelStyle>
-                                        <chart:NumericalAxis.MajorGridLineStyle>
-                                            <chart:ChartLineStyle 
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis Minimum="0" Maximum="100" Interval="50" TickPosition="Inside">
+                                    <chart:NumericalAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:NumericalAxis.LabelStyle>
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle 
                                                 StrokeDashArray="2,4"
                                                 Stroke="LightGray"
                                                 StrokeWidth="1"/>
-                                        </chart:NumericalAxis.MajorGridLineStyle>
-                                    </chart:NumericalAxis>
-                                    <chart:NumericalAxis Name="RatioAxis" CrossesAt="{x:Static sys:Double.MaxValue}" Minimum="4" Maximum="6" Interval="1" TickPosition="Inside">
-                                        <chart:NumericalAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
-                                        </chart:NumericalAxis.LabelStyle>
-                                    </chart:NumericalAxis>
-                                </chart:SfCartesianChart.YAxes>
-                                <chart:SfCartesianChart.Series>
-                                    <chart:ColumnSeries
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+                                </chart:NumericalAxis>
+                                <chart:NumericalAxis Name="RatioAxis" CrossesAt="{x:Static sys:Double.MaxValue}" Minimum="4" Maximum="6" Interval="1" TickPosition="Inside">
+                                    <chart:NumericalAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                    </chart:NumericalAxis.LabelStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
+                            <chart:SfCartesianChart.Series>
+                                <chart:ColumnSeries
                                         ItemsSource="{Binding Snapshots}"
                                         XBindingPath="Timestamp"
                                         YBindingPath="InventoryOverTimeValue"
@@ -488,7 +485,7 @@
                                         EnableTooltip="True"
                                         EnableAnimation="True"
                                         Label="Inventory Value"/>
-                                    <chart:ColumnSeries
+                                <chart:ColumnSeries
                                         ItemsSource="{Binding Snapshots}"
                                         XBindingPath="Timestamp"
                                         YBindingPath="SalesAmount"
@@ -496,7 +493,7 @@
                                         EnableTooltip="True"
                                         EnableAnimation="True"
                                         Label="Sales Amount"/>
-                                    <chart:SplineSeries
+                                <chart:SplineSeries
                                         ItemsSource="{Binding Snapshots}"
                                         XBindingPath="Timestamp"
                                         YBindingPath="InventorySalesRatio"
@@ -506,12 +503,11 @@
                                         EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Ratio"/>
-                                </chart:SfCartesianChart.Series>
-                            </chart:SfCartesianChart>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </ScrollView>
+                            </chart:SfCartesianChart.Series>
+                        </chart:SfCartesianChart>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
     </ScrollView>
 </ContentPage>

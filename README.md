@@ -43,7 +43,7 @@ Syncfusion’s dashboard adapts naturally to logistics and supply chain workflow
 ## Syncfusion Controls Highlighted
 
 - [SfRadialGauge](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.Gauges.SfRadialGauge.html)
-- [SfCartesianChart](https://help.syncfusion.com/cr/maui/Syncfusion.Maui.Charts.SfCartesianChart.html)
+- [SfCartesianChart](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.SfCartesianChart.html)
 
 ## Output
 
