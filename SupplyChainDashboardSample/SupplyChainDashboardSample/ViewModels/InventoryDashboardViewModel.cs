@@ -6,84 +6,38 @@ using System.Windows.Input;
 namespace SupplyChainDashboardSample
 {
     /// <summary>
-    /// ViewModel backing the Inventory Dashboard. It exposes KPI snapshots, top items,
-    /// and animated values for UI binding, as well as timer-driven updates.
+    /// ViewModel for the supply chain inventory dashboard. Manages KPI values, chart series,
+    /// top items, and provides change notifications to the UI.
     /// </summary>
-    public class InventoryDashboardViewModel : INotifyPropertyChanged
+    public partial class InventoryDashboardViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Tracks the latest generated timestamp for snapshots.
-        /// </summary>
         private DateTime Date;
-
-        /// <summary>
-        /// Maintains the number of update cycles executed by the timer,
-        /// used to track progression of seeded snapshots.
-        /// </summary>
         private int count;
-
-        /// <summary>
-        /// Random generator used for seeding demo data.
-        /// </summary>
         private readonly Random random = new();
-
-        /// <summary>
-        /// Backing flag used to stop the periodic timer loop.
-        /// </summary>
         private bool canStopTimer;
 
+        private KpiCards? _kpis;
         private double _animatedInventoryValue;
-        /// <summary>
-        /// Gets the animated inventory value shown in the KPI card.
-        /// </summary>
-        public double AnimatedInventoryValue { get => _animatedInventoryValue; private set => Set(ref _animatedInventoryValue, value); }
-
         private string _animatedInventoryChange = string.Empty;
-        /// <summary>
-        /// Gets the formatted change text for the inventory value.
-        /// </summary>
-        public string AnimatedInventoryChange { get => _animatedInventoryChange; private set => Set(ref _animatedInventoryChange, value); }
-
         private double _animatedStockAvailable;
-        /// <summary>
-        /// Gets the animated stock available value.
-        /// </summary>
-        public double AnimatedStockAvailable { get => _animatedStockAvailable; private set => Set(ref _animatedStockAvailable, value); }
-
         private string _animatedStockChange = string.Empty;
-        /// <summary>
-        /// Gets the formatted change text for stock available.
-        /// </summary>
-        public string AnimatedStockChange { get => _animatedStockChange; private set => Set(ref _animatedStockChange, value); }
-
         private double _animatedTurnoverRatio;
-        /// <summary>
-        /// Gets the animated turnover ratio value.
-        /// </summary>
-        public double AnimatedTurnoverRatio { get => _animatedTurnoverRatio; private set => Set(ref _animatedTurnoverRatio, value); }
-
         private double _animatedInventoryToSalesRatio;
-        /// <summary>
-        /// Gets the animated inventory to sales ratio value.
-        /// </summary>
-        public double AnimatedInventoryToSalesRatio { get => _animatedInventoryToSalesRatio; private set => Set(ref _animatedInventoryToSalesRatio, value); }
-
         private double _animatedAvgDaysOfSupply;
-        /// <summary>
-        /// Gets the animated average days of supply value.
-        /// </summary>
-        public double AnimatedAvgDaysOfSupply { get => _animatedAvgDaysOfSupply; private set => Set(ref _animatedAvgDaysOfSupply, value); }
+        private string _topItemsMetricPath = nameof(TopItem.Value);
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Event raised when any bindable property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        /// Sets the given backing field and raises <see cref="PropertyChanged"/> when the value changes.
+        /// Sets a backing field and raises <see cref="PropertyChanged"/> when the value changes.
         /// </summary>
-        /// <typeparam name="T">Type of the field.</typeparam>
-        /// <param name="field">Reference to the backing field to update.</param>
+        /// <typeparam name="T">The field type.</typeparam>
+        /// <param name="field">Reference to the backing field.</param>
         /// <param name="value">New value to assign.</param>
-        /// <param name="name">Caller-supplied property name. Provided automatically.</param>
+        /// <param name="name">Caller member name, supplied by the compiler.</param>
         void Set<T>(ref T field, T value, [CallerMemberName] string? name = null)
         {
             if (!Equals(field, value))
@@ -94,177 +48,104 @@ namespace SupplyChainDashboardSample
         }
 
         /// <summary>
-        /// Collection used for inventory movement (waterfall) visualization.
+        /// Current KPI card values displayed on the dashboard.
+        /// </summary>
+        public KpiCards? Kpis { get => _kpis; private set => Set(ref _kpis, value); }
+
+        /// <summary>
+        /// Time series for the Inventory Value Over Time chart.
+        /// </summary>
+        public ObservableCollection<InventoryValueOverTimePoint> InventoryValueOverTime { get; set; }
+
+        /// <summary>
+        /// Time series for the Turnover by Hour chart.
+        /// </summary>
+        public ObservableCollection<TurnoverByHourPoint> TurnoverByHour { get; set; }
+
+        /// <summary>
+        /// Time series for the Inventory to Sales Analysis chart.
+        /// </summary>
+        public ObservableCollection<InventoryToSalesAnalysisPoint> InventoryToSalesAnalysis { get; set; }
+
+        /// <summary>
+        /// Current inventory movement breakdown (increase/decrease/total).
         /// </summary>
         public ObservableCollection<InventoryMovement> InventoryMovement { get; } = new();
 
         /// <summary>
-        /// Collection of top items for ranking and charts.
+        /// Top items by value or quantity.
         /// </summary>
         public ObservableCollection<TopItem> TopItems { get; } = new();
 
         /// <summary>
-        /// Historical KPI snapshots displayed by time-based charts.
+        /// Animated KPI value bound to the Inventory Value card.
         /// </summary>
-        public ObservableCollection<KpiSnapshot> Snapshots { get; } = new();
+        public double AnimatedInventoryValue { get => _animatedInventoryValue; private set => Set(ref _animatedInventoryValue, value); }
 
-        private string _topItemsMetricPath = nameof(TopItem.Value);
         /// <summary>
-        /// Gets or sets the bound path used by UI to choose the metric displayed for TopItems (Value or Quantity).
+        /// Animated KPI text for Inventory Value change.
+        /// </summary>
+        public string AnimatedInventoryChange { get => _animatedInventoryChange; private set => Set(ref _animatedInventoryChange, value); }
+
+        /// <summary>
+        /// Animated KPI value bound to the Stock Available card.
+        /// </summary>
+        public double AnimatedStockAvailable { get => _animatedStockAvailable; private set => Set(ref _animatedStockAvailable, value); }
+
+        /// <summary>
+        /// Animated KPI text for Stock Available change.
+        /// </summary>
+        public string AnimatedStockChange { get => _animatedStockChange; private set => Set(ref _animatedStockChange, value); }
+
+        /// <summary>
+        /// Animated KPI value for Turnover Ratio.
+        /// </summary>
+        public double AnimatedTurnoverRatio { get => _animatedTurnoverRatio; private set => Set(ref _animatedTurnoverRatio, value); }
+
+        /// <summary>
+        /// Animated KPI value for Inventory to Sales Ratio.
+        /// </summary>
+        public double AnimatedInventoryToSalesRatio { get => _animatedInventoryToSalesRatio; private set => Set(ref _animatedInventoryToSalesRatio, value); }
+
+        /// <summary>
+        /// Animated KPI value for Average Inventory Days of Supply.
+        /// </summary>
+        public double AnimatedAvgDaysOfSupply { get => _animatedAvgDaysOfSupply; private set => Set(ref _animatedAvgDaysOfSupply, value); }
+
+        /// <summary>
+        /// Binding path used by the Top Items list (Value or Quantity).
         /// </summary>
         public string TopItemsMetricPath { get => _topItemsMetricPath; set => Set(ref _topItemsMetricPath, value); }
 
         /// <summary>
-        /// Command to switch TopItems metric between Value and Quantity.
+        /// Command that switches the <see cref="TopItemsMetricPath"/> between Value and Quantity.
         /// </summary>
         public ICommand SetTopItemsMetricCommand { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InventoryDashboardViewModel"/> class
-        /// and seeds demo data collections.
+        /// Initializes the ViewModel, chart collections, command handlers, and seeds TopItems.
         /// </summary>
         public InventoryDashboardViewModel()
         {
+            InventoryValueOverTime = new ObservableCollection<InventoryValueOverTimePoint>();
+            TurnoverByHour = new ObservableCollection<TurnoverByHourPoint>();
+            InventoryToSalesAnalysis = new ObservableCollection<InventoryToSalesAnalysisPoint>();
+
             SetTopItemsMetricCommand = new Command<string>(p =>
             {
                 TopItemsMetricPath = (p == "Quantity") ? nameof(TopItem.Quantity) : nameof(TopItem.Value);
             });
 
-            // Top 10 Items based on value and quantity
-            TopItems.Add(new TopItem { Code = "C100006", ItemName = "C100006 - Cherry Finished Crystal Model", Value = 14, Quantity = 156000 });
-            TopItems.Add(new TopItem { Code = "C100011", ItemName = "C100011 - Winter Frost Vase", Value = 13, Quantity = 143000 });
-            TopItems.Add(new TopItem { Code = "C100055", ItemName = "C100055 - Silver Plated Photo Frame", Value = 12, Quantity = 132000 });
-            TopItems.Add(new TopItem { Code = "C100009", ItemName = "C100009 - Normandy Vase", Value = 12, Quantity = 120000 });
-            TopItems.Add(new TopItem { Code = "C100010", ItemName = "C100010 - Wisper-Cut Vase", Value = 12, Quantity = 118000 });
-            TopItems.Add(new TopItem { Code = "C100040", ItemName = "C100040 - Channel Speaker System", Value = 9, Quantity = 95000 });
-            TopItems.Add(new TopItem { Code = "C100004", ItemName = "C100004 - Walnut Medallion Plate", Value = 8, Quantity = 84000 });
-            TopItems.Add(new TopItem { Code = "C100005", ItemName = "C100005 - Cherry Finished Crystal Bowl", Value = 8, Quantity = 82000 });
-            TopItems.Add(new TopItem { Code = "C100003", ItemName = "C100003 - Cherry Finish Frame", Value = 8, Quantity = 81000 });
-            TopItems.Add(new TopItem { Code = "C100051", ItemName = "C100051 - Bamboo Digital Picture Frame", Value = 8, Quantity = 79000 });
-        }
-
-        /// <summary>
-        /// Creates and returns a randomized <see cref="KpiSnapshot"/> for the supplied timestamp.
-        /// Also seeds the <see cref="InventoryMovement"/> collection for waterfall visualization.
-        /// </summary>
-        /// <param name="timestamp">The base timestamp used to generate the snapshot.</param>
-        /// <returns>A populated <see cref="KpiSnapshot"/> instance.</returns>
-        private KpiSnapshot SeedSnapshot(DateTime timestamp)
-        {
-            var inventoryValue = Math.Round(random.NextDouble() * (21000000 - 20000000) + 20000000);
-            var inventoryChange = Math.Round(random.NextDouble() * (2500000 - 1000000) + 1000000);
-            var stockAvailableValue = Math.Round(random.NextDouble() * (3900000 - 3700000) + 3700000);
-            var stockAvailableChange = Math.Round(random.NextDouble() * (60000 - 40000) + 40000);
-            var turnoverRatio = Math.Round(random.NextDouble() * (9.5 - 8.5) + 8.5, 2);
-            var inventoryToSalesRatio = Math.Round(random.NextDouble() * (0.5 - 0.4) + 0.4, 2);
-            var avgInventoryDaysOfSupply = random.Next(35, 43);
-            var inventoryOverTimeValue = random.Next(80, 120);
-            var inventoryValueOverTimeChange = random.Next(2, 26);
-            var turnoverHoursValue = random.Next(30, 55);
-            var salesAmount = random.Next(80, 90);
-            var inventorySalesRatio = Math.Round(random.NextDouble() * (5.5 - 4.5) + 4.5, 2);
-            var snapshot = new KpiSnapshot
-            {
-                Timestamp = timestamp,
-                InventoryValue = inventoryValue,
-                InventoryChange = $"Change: {inventoryChange:N0}",
-                StockAvailableValue = stockAvailableValue,
-                StockAvailableChange = $"Change: {stockAvailableChange:N0}",
-                TurnoverRatioValue = turnoverRatio,
-                InventoryToSalesRatioValue = inventoryToSalesRatio,
-                AvgInventoryDaysOfSupplyValue = avgInventoryDaysOfSupply,
-                InventoryOverTimeValue = inventoryOverTimeValue,
-                InventoryValueOverTimeChange = inventoryValueOverTimeChange,
-                TurnoverHoursValue = turnoverHoursValue,
-                SalesAmount = salesAmount,
-                InventorySalesRatio = inventorySalesRatio
-            };
-
-            return snapshot;
-        }
-
-        /// <summary> 
-        /// Periodic update routine invoked by the dispatcher timer. 
-        /// Advances the timestamp, appends a new KPI snapshot, 
-        /// refreshes animated KPI values, and reseeds inventory movement data. 
-        /// </summary> 
-        /// <returns> 
-        /// True while the timer should continue running; false when stopped. 
-        /// </returns>
-        private bool UpdateVerticalData()
-        {
-            if (canStopTimer) return false;
-
-            Date = Date.Add(TimeSpan.FromSeconds(1));
-            Snapshots.Add(SeedSnapshot(Date));
-            UpdateKpis(SeedSnapshot(Date));
-            SeedInventoryMovement();
-            count = count + 1;
-            return true;
-        }
-
-        /// <summary> 
-        /// Clears and repopulates the <see cref="InventoryMovement"/> collection 
-        /// with randomized Increase, Decrease, and Total values 
-        /// for waterfall chart visualization. 
-        /// </summary>
-        private void SeedInventoryMovement()
-        {
-            InventoryMovement.Clear();
-            
-            int increase = random.Next(55, 60);
-            int decrease = -random.Next(45, 50);
-            int total = increase + decrease;
-
-            InventoryMovement.Add(new InventoryMovement { MovementType = "Increase", MovementValue = increase, IsSummary = false });
-            InventoryMovement.Add(new InventoryMovement { MovementType = "Decrease", MovementValue = decrease, IsSummary = false });
-            InventoryMovement.Add(new InventoryMovement { MovementType = "Total", MovementValue = total, IsSummary = true });
-        }
-
-        /// <summary>
-        /// Updates the animated KPI values based on the provided snapshot.
-        /// </summary>
-        /// <param name="snapshot">The snapshot used as the source of KPI values.</param>
-        private void UpdateKpis(KpiSnapshot snapshot)
-        {
-            AnimatedInventoryValue = snapshot.InventoryValue;
-            AnimatedInventoryChange = snapshot.InventoryChange;
-            AnimatedStockAvailable = snapshot.StockAvailableValue;
-            AnimatedStockChange = snapshot.StockAvailableChange;
-            AnimatedTurnoverRatio = snapshot.TurnoverRatioValue;
-            AnimatedInventoryToSalesRatio = snapshot.InventoryToSalesRatioValue;
-            AnimatedAvgDaysOfSupply = snapshot.AvgInventoryDaysOfSupplyValue;
-        }
-
-        /// <summary>
-        /// Starts a repeating timer that appends new random snapshots and updates the KPI cards.
-        /// </summary>
-        public void StartTimer()
-        {
-            Snapshots.Clear();
-
-            Date = new DateTime(2026, 1, 1, 01, 00, 00);
-
-            Snapshots.Add(SeedSnapshot(Date));
-            Snapshots.Add(SeedSnapshot(Date.Add(TimeSpan.FromSeconds(1))));
-            Snapshots.Add(SeedSnapshot(Date.Add(TimeSpan.FromSeconds(2))));
-            SeedInventoryMovement();
-            Date = Date.Add(TimeSpan.FromSeconds(2));
-
-            canStopTimer = false;
-            count = 1;
-
-            if (Application.Current != null)
-                Application.Current.Dispatcher.StartTimer(new TimeSpan(0, 0, 0, 0, 500), UpdateVerticalData);
-        }
-
-        /// <summary>
-        /// Requests the running timer (if any) to stop.
-        /// </summary>
-        public void StopTimer()
-        {
-            canStopTimer = true;
-            count = 1;
+            TopItems.Add(new TopItem( "C100006", "C100006 - Cherry Finished Crystal Model", 14, 156000 ));
+            TopItems.Add(new TopItem( "C100011", "C100011 - Winter Frost Vase", 13, 143000 ));
+            TopItems.Add(new TopItem( "C100055", "C100055 - Silver Plated Photo Frame", 12, 132000 ));
+            TopItems.Add(new TopItem( "C100009", "C100009 - Normandy Vase", 12, 120000 ));
+            TopItems.Add(new TopItem( "C100010", "C100010 - Wisper-Cut Vase", 12, 118000 ));
+            TopItems.Add(new TopItem( "C100040", "C100040 - Channel Speaker System", 9, 95000 ));
+            TopItems.Add(new TopItem( "C100004", "C100004 - Walnut Medallion Plate", 8, 84000 ));
+            TopItems.Add(new TopItem( "C100005", "C100005 - Cherry Finished Crystal Bowl", 8, 82000 ));
+            TopItems.Add(new TopItem( "C100003", "C100003 - Cherry Finish Frame", 8, 81000 ));
+            TopItems.Add(new TopItem( "C100051", "C100051 - Bamboo Digital Picture Frame", 8, 79000 ));
         }
     }
 }

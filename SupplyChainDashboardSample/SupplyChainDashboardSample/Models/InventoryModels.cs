@@ -1,121 +1,168 @@
 namespace SupplyChainDashboardSample
 {
     /// <summary>
-    /// Represents a single snapshot of KPI metrics captured at a specific time.
+    /// Represents the current values displayed in KPI cards on the dashboard.
     /// </summary>
-    public class KpiSnapshot
+    public class KpiCards
     {
         /// <summary>
-        /// Gets or sets the timestamp for this KPI snapshot.
-        /// </summary>
-        public DateTime Timestamp { get; set; }
-
-        /// <summary>
-        /// Gets or sets the total inventory value at the time of the snapshot.
+        /// Total inventory value.
         /// </summary>
         public double InventoryValue { get; set; }
 
         /// <summary>
-        /// Gets or sets the formatted change string for the inventory value since the previous snapshot.
-        /// Example: "Change: 125,000".
+        /// Formatted text describing the inventory value change.
         /// </summary>
         public string InventoryChange { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the value of stock available at the time of the snapshot.
+        /// Quantity/value available in stock.
         /// </summary>
         public double StockAvailableValue { get; set; }
 
         /// <summary>
-        /// Gets or sets the formatted change string for stock available since the previous snapshot.
+        /// Formatted text describing the stock available change.
         /// </summary>
         public string StockAvailableChange { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the inventory turnover ratio value.
+        /// Inventory turnover ratio.
         /// </summary>
-        public double TurnoverRatioValue { get; set; }
+        public double TurnoverRatio { get; set; }
 
         /// <summary>
-        /// Gets or sets the inventory to sales ratio value.
+        /// Ratio of inventory to sales.
         /// </summary>
-        public double InventoryToSalesRatioValue { get; set; }
+        public double InventoryToSalesRatio { get; set; }
 
         /// <summary>
-        /// Gets or sets the average number of days of supply available.
+        /// Average inventory days of supply.
         /// </summary>
-        public double AvgInventoryDaysOfSupplyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets the indexed inventory metric used for over-time charting.
-        /// </summary>
-        public double InventoryOverTimeValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets the percent change for the inventory over time metric.
-        /// </summary>
-        public double InventoryValueOverTimeChange { get; set; }
-
-        /// <summary>
-        /// Gets or sets the turnover in hours value.
-        /// </summary>
-        public double TurnoverHoursValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets the sales amount associated with this snapshot period.
-        /// </summary>
-        public double SalesAmount { get; set; }
-
-        /// <summary>
-        /// Gets or sets the inventory to sales ratio represented as a numeric value.
-        /// </summary>
-        public double InventorySalesRatio { get; set; }
+        public double AvgInventoryDaysOfSupply { get; set; }
     }
 
     /// <summary>
-    /// Represents a single inventory movement item used for waterfall visualization.
+    /// Snapshot point for the Inventory Value Over Time series.
     /// </summary>
-    public class InventoryMovement
+    /// <param name="timestamp">Timestamp for the data point.</param>
+    /// <param name="inventoryValue">Inventory value at the timestamp.</param>
+    /// <param name="valueChange">Change value associated with that timestamp.</param>
+    public class InventoryValueOverTimePoint(DateTime timestamp, double inventoryValue, double valueChange)
     {
         /// <summary>
-        /// Gets or sets the movement category (e.g., Increase, Decrease, Total).
+        /// The timestamp for the point.
         /// </summary>
-        public string MovementType { get; set; } = string.Empty;
+        public DateTime Timestamp { get; set; } = timestamp;
 
         /// <summary>
-        /// Gets or sets the numeric value of the movement. Decreases are expected to be negative.
+        /// The inventory value at this point in time.
         /// </summary>
-        public double MovementValue { get; set; }
+        public double InventoryOverTimeValue { get; set; } = inventoryValue;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this item represents a summary/total in a waterfall chart.
+        /// The change in inventory value at this point in time.
         /// </summary>
-        public bool IsSummary { get; set; }
+        public double InventoryValueOverTimeChange { get; set; } = valueChange;
     }
 
     /// <summary>
-    /// Represents a top-selling inventory item used to populate ranking lists and charts.
+    /// Snapshot point for turnover hours series.
     /// </summary>
-    public class TopItem
+    /// <param name="timestamp">Timestamp for the data point.</param>
+    /// <param name="turnoverHoursValue">Turnover hours at the timestamp.</param>
+    public class TurnoverByHourPoint(DateTime timestamp, double turnoverHoursValue)
     {
         /// <summary>
-        /// Gets or sets the unique product code.
+        /// The timestamp for the point.
         /// </summary>
-        public string Code { get; set; } = string.Empty;
+        public DateTime Timestamp { get; set; } = timestamp;
+        /// <summary>
+        /// Turnover hours value at this point in time.
+        /// </summary>
+        public double TurnoverHoursValue { get; set; } = turnoverHoursValue;
+    }
+
+    /// <summary>
+    /// Snapshot point for Inventory to Sales Analysis series.
+    /// </summary>
+    /// <param name="timestamp">Timestamp for the data point.</param>
+    /// <param name="inventoryValue">Inventory value at the timestamp.</param>
+    /// <param name="salesAmount">Sales amount at the timestamp.</param>
+    /// <param name="inventorySalesRatio">Inventory to sales ratio at the timestamp.</param>
+    public class InventoryToSalesAnalysisPoint(DateTime timestamp, double inventoryValue, double salesAmount, double inventorySalesRatio)
+    {
+        /// <summary>
+        /// The timestamp for the point.
+        /// </summary>
+        public DateTime Timestamp { get; set; } = timestamp;
 
         /// <summary>
-        /// Gets or sets the display name of the inventory item.
+        /// The inventory value at this point in time.
         /// </summary>
-        public string ItemName { get; set; } = string.Empty;
+        public double InventoryOverTimeValue { get; set; } = inventoryValue;
 
         /// <summary>
-        /// Gets or sets the metric value used for ranking in charts (e.g., revenue or score).
+        /// Sales amount at this point in time.
         /// </summary>
-        public int Value { get; set; }
+        public double SalesAmount { get; set; } = salesAmount;
 
         /// <summary>
-        /// Gets or sets the quantity sold or moved for this inventory item.
+        /// Inventory to sales ratio at this point in time.
         /// </summary>
-        public int Quantity { get; set; }
+        public double InventorySalesRatio { get; set; } = inventorySalesRatio;
+    }
+
+    /// <summary>
+    /// Represents an inventory movement contribution.
+    /// </summary>
+    /// <param name="movementType">Type of movement (Increase, Decrease, Total).</param>
+    /// <param name="movementValue">Magnitude of the movement. Decrease can be negative.</param>
+    /// <param name="isSummary">True if the entry is a summary row (e.g., Total).</param>
+    public class InventoryMovement(string movementType, double movementValue, bool isSummary)
+    {
+        /// <summary>
+        /// Type of movement (Increase, Decrease, Total).
+        /// </summary>
+        public string MovementType { get; set; } = movementType;
+
+        /// <summary>
+        /// Movement magnitude. Decrease can be negative.
+        /// </summary>
+        public double MovementValue { get; set; } = movementValue;
+
+        /// <summary>
+        /// Indicates if this is a summary row.
+        /// </summary>
+        public bool IsSummary { get; set; } = isSummary;
+    }
+
+    /// <summary>
+    /// Represents a top item in the dashboard.
+    /// </summary>
+    /// <param name="code">Item code.</param>
+    /// <param name="itemName">Item display name.</param>
+    /// <param name="value">Total value used for ranking.</param>
+    /// <param name="quantity">Total quantity used for ranking.</param>
+    public class TopItem(string code, string itemName, int value, int quantity)
+    {
+        /// <summary>
+        /// Item code.
+        /// </summary>
+        public string Code { get; set; } = code;
+
+        /// <summary>
+        /// Item display name.
+        /// </summary>
+        public string ItemName { get; set; } = itemName;
+
+        /// <summary>
+        /// Total value used for ranking.
+        /// </summary>
+        public int Value { get; set; } = value;
+
+        /// <summary>
+        /// Total quantity used for ranking.
+        /// </summary>
+        public int Quantity { get; set; } = quantity;
     }
 }

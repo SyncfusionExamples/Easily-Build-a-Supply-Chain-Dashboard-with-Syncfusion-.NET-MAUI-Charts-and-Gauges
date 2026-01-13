@@ -75,8 +75,8 @@
 
                         <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
                             <Label Text="INVENTORY VALUE" FontSize="16" TextColor="#9ca3af" HorizontalOptions="Start"/>
-                            <Label Grid.Row="1" Text="{Binding AnimatedInventoryValue, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#34d399" HorizontalOptions="Start"/>
-                            <Label Grid.Row="2" Text="{Binding AnimatedInventoryChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
+                            <Label Grid.Row="1" Text="{Binding Kpis.InventoryValue, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#34d399" HorizontalOptions="Start"/>
+                            <Label Grid.Row="2" Text="{Binding Kpis.InventoryChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -99,8 +99,8 @@
 
                         <Grid Grid.Column="1" Padding="16,10,16,10" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center">
                             <Label Text="STOCK AVAILABLE" FontSize="16" TextColor="#9ca3af" HorizontalOptions="Start"/>
-                            <Label Grid.Row="1" Text="{Binding AnimatedStockAvailable, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#22d3ee" HorizontalOptions="Start"/>
-                            <Label Grid.Row="2" Text="{Binding AnimatedStockChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
+                            <Label Grid.Row="1" Text="{Binding Kpis.StockAvailableValue, StringFormat='{}{0:N0}'}" FontSize="24" FontAttributes="Bold" TextColor="#22d3ee" HorizontalOptions="Start"/>
+                            <Label Grid.Row="2" Text="{Binding Kpis.StockAvailableChange}" FontSize="14" TextColor="#60a5fa" HorizontalOptions="Start"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -118,13 +118,13 @@
                                         <gauge:RadialLineStyle Thickness="20" />
                                     </gauge:RadialAxis.AxisLineStyle>
                                     <gauge:RadialAxis.Pointers>
-                                        <gauge:RangePointer Value="{Binding AnimatedTurnoverRatio}" PointerWidth="20" EnableAnimation="True" Fill="#d4a0e8"/>
+                                        <gauge:RangePointer Value="{Binding Kpis.TurnoverRatio}" PointerWidth="20" Fill="#d4a0e8"/>
                                     </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                             <gauge:GaugeAnnotation.Content>
                                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding AnimatedTurnoverRatio, StringFormat='{0:0.00}'}"
+                                                    <Label Text="{Binding Kpis.TurnoverRatio, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"
@@ -153,13 +153,13 @@
                                         <gauge:RadialLineStyle Thickness="20" />
                                     </gauge:RadialAxis.AxisLineStyle>
                                     <gauge:RadialAxis.Pointers>
-                                        <gauge:RangePointer Value="{Binding AnimatedInventoryToSalesRatio}" PointerWidth="20" EnableAnimation="True" Fill="#2772bc"/>
+                                        <gauge:RangePointer Value="{Binding Kpis.InventoryToSalesRatio}" PointerWidth="20" Fill="#2772bc"/>
                                     </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                             <gauge:GaugeAnnotation.Content>
                                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding AnimatedInventoryToSalesRatio, StringFormat='{0:0.00}'}"
+                                                    <Label Text="{Binding Kpis.InventoryToSalesRatio, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"
@@ -188,13 +188,13 @@
                                         <gauge:RadialLineStyle Thickness="20" />
                                     </gauge:RadialAxis.AxisLineStyle>
                                     <gauge:RadialAxis.Pointers>
-                                        <gauge:RangePointer Value="{Binding AnimatedAvgDaysOfSupply}" PointerWidth="20" EnableAnimation="True" Fill="#ffcf66"/>
+                                        <gauge:RangePointer Value="{Binding Kpis.AvgInventoryDaysOfSupply}" PointerWidth="20" Fill="#ffcf66"/>
                                     </gauge:RadialAxis.Pointers>
                                     <gauge:RadialAxis.Annotations>
                                         <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
                                             <gauge:GaugeAnnotation.Content>
                                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding AnimatedAvgDaysOfSupply, StringFormat='{0:0.00}'}"
+                                                    <Label Text="{Binding Kpis.AvgInventoryDaysOfSupply, StringFormat='{0:0.00}'}"
                                                            FontSize="18"
                                                            FontAttributes="Bold"
                                                            TextColor="LightGrey"
@@ -228,9 +228,9 @@
                             </chart:SfCartesianChart.Legend>
 
                             <chart:SfCartesianChart.XAxes>
-                                <chart:DateTimeAxis   Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12" TickPosition="Inside" ShowMajorGridLines="False">
+                                <chart:DateTimeAxis EnableAutoIntervalOnZooming="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="10" TickPosition="Inside" ShowMajorGridLines="False">
                                     <chart:DateTimeAxis.LabelStyle>
-                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                        <chart:ChartAxisLabelStyle LabelFormat="{OnPlatform Default=htt,Android=htt,iOS=htt}" TextColor="LightGray"/>
                                     </chart:DateTimeAxis.LabelStyle>
                                 </chart:DateTimeAxis>
                             </chart:SfCartesianChart.XAxes>
@@ -250,20 +250,18 @@
                             </chart:SfCartesianChart.YAxes>
                             <chart:SfCartesianChart.Series>
                                 <chart:ColumnSeries 
-                                        ItemsSource="{Binding Snapshots}" 
+                                        ItemsSource="{Binding InventoryValueOverTime}" 
                                         XBindingPath="Timestamp" 
                                         YBindingPath="InventoryOverTimeValue"
                                         Fill="#2fcf75"
                                         EnableTooltip="True" 
-                                        EnableAnimation="True"
                                         Label="Inventory Value"/>
                                 <chart:SplineSeries 
-                                        ItemsSource="{Binding Snapshots}" 
+                                        ItemsSource="{Binding InventoryValueOverTime}" 
                                         XBindingPath="Timestamp" 
                                         YBindingPath="InventoryValueOverTimeChange"
                                         Fill="LightGrey"
                                         EnableTooltip="True"
-                                        EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Change"/>
                             </chart:SfCartesianChart.Series>
@@ -279,9 +277,9 @@
                         <Label Text="Turnover (Days) by Hour" FontAttributes="Bold"/>
                         <chart:SfCartesianChart Grid.Row="1" HeightRequest="185" x:Name="turnoverChart" Margin="0,40,0,0">
                             <chart:SfCartesianChart.XAxes>
-                                <chart:DateTimeAxis  Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12" TickPosition="Inside" ShowMajorGridLines="False">
+                                <chart:DateTimeAxis EnableAutoIntervalOnZooming="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="10" TickPosition="Inside" ShowMajorGridLines="False">
                                     <chart:DateTimeAxis.LabelStyle>
-                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                        <chart:ChartAxisLabelStyle LabelFormat="{OnPlatform Default=htt,Android=htt,iOS=htt}" TextColor="LightGray"/>
                                     </chart:DateTimeAxis.LabelStyle>
                                 </chart:DateTimeAxis>
                             </chart:SfCartesianChart.XAxes>
@@ -301,12 +299,11 @@
                             </chart:SfCartesianChart.YAxes>
                             <chart:SfCartesianChart.Series>
                                 <chart:SplineSeries 
-                                        ItemsSource="{Binding Snapshots}" 
+                                        ItemsSource="{Binding TurnoverByHour}" 
                                         XBindingPath="Timestamp" 
                                         YBindingPath="TurnoverHoursValue"
                                         Fill="#d4a0e8"
                                         EnableTooltip="True"
-                                        EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Turnover"/>
                             </chart:SfCartesianChart.Series>
@@ -349,8 +346,7 @@
                                         YBindingPath="{Binding TopItemsMetricPath}"
                                         Width="0.5"
                                         Fill="#2fcf75"
-                                        EnableTooltip="True"
-                                        EnableAnimation="True"/>
+                                        EnableTooltip="True"/>
                             </chart:SfCartesianChart.Series>
                         </chart:SfCartesianChart>
 
@@ -424,7 +420,6 @@
                                         YBindingPath="MovementValue"
                                         Fill="#00a67e"
                                         EnableTooltip="True"
-                                        EnableAnimation="True"
                                         NegativePointsBrush="#fb7185"
                                         SummaryPointsBrush="RoyalBlue"
                                         SummaryBindingPath="IsSummary"
@@ -451,9 +446,9 @@
                             </chart:SfCartesianChart.Legend>
 
                             <chart:SfCartesianChart.XAxes>
-                                <chart:DateTimeAxis  TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Seconds" AutoScrollingDeltaType="Seconds" AutoScrollingDelta="12">
+                                <chart:DateTimeAxis TickPosition="Inside" ShowMajorGridLines="False" Interval="1" EnableAutoIntervalOnZooming="False" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="10">
                                     <chart:DateTimeAxis.LabelStyle>
-                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                        <chart:ChartAxisLabelStyle LabelFormat="{OnPlatform Default=htt,Android=htt,iOS=htt}" TextColor="LightGray"/>
                                     </chart:DateTimeAxis.LabelStyle>
                                 </chart:DateTimeAxis>
                             </chart:SfCartesianChart.XAxes>
@@ -478,29 +473,26 @@
                             </chart:SfCartesianChart.YAxes>
                             <chart:SfCartesianChart.Series>
                                 <chart:ColumnSeries
-                                        ItemsSource="{Binding Snapshots}"
+                                        ItemsSource="{Binding InventoryToSalesAnalysis}"
                                         XBindingPath="Timestamp"
                                         YBindingPath="InventoryOverTimeValue"
                                         Fill="#2fcf75"
                                         EnableTooltip="True"
-                                        EnableAnimation="True"
                                         Label="Inventory Value"/>
                                 <chart:ColumnSeries
-                                        ItemsSource="{Binding Snapshots}"
+                                        ItemsSource="{Binding InventoryToSalesAnalysis}"
                                         XBindingPath="Timestamp"
                                         YBindingPath="SalesAmount"
                                         Fill="#ffcf66"
                                         EnableTooltip="True"
-                                        EnableAnimation="True"
                                         Label="Sales Amount"/>
                                 <chart:SplineSeries
-                                        ItemsSource="{Binding Snapshots}"
+                                        ItemsSource="{Binding InventoryToSalesAnalysis}"
                                         XBindingPath="Timestamp"
                                         YBindingPath="InventorySalesRatio"
                                         YAxisName="RatioAxis"
                                         Fill="#2162af"
                                         EnableTooltip="True"
-                                        EnableAnimation="True"
                                         StrokeWidth="3"
                                         Label="Ratio"/>
                             </chart:SfCartesianChart.Series>
