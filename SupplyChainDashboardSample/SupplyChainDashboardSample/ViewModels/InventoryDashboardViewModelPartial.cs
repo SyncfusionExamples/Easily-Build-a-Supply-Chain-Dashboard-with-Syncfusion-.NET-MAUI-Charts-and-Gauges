@@ -45,9 +45,9 @@ namespace SupplyChainDashboardSample
             Kpis = new KpiCards
             {
                 InventoryValue = Math.Round(random.NextDouble() * (21000000 - 20000000) + 20000000),
-                InventoryChange = $"Change: {Math.Round(random.NextDouble() * (2500000 - 1000000) + 1000000):NO}",
+                InventoryChange = $"Change: {Math.Round(random.NextDouble() * (2500000 - 1000000) + 1000000):N0}",
                 StockAvailableValue = Math.Round(random.NextDouble() * (3900000 - 3700000) + 3700000),
-                StockAvailableChange = $"Change: {Math.Round(random.NextDouble() * (60000 - 40000) + 40000):NO}",
+                StockAvailableChange = $"Change: {Math.Round(random.NextDouble() * (60000 - 40000) + 40000):N0}",
                 TurnoverRatio = Math.Round(random.NextDouble() * (9.5 - 8.5) + 8.5, 2),
                 InventoryToSalesRatio = Math.Round(random.NextDouble() * (0.5 - 0.4) + 0.4, 2),
                 AvgInventoryDaysOfSupply = random.Next(35, 43),
