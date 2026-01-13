@@ -19,7 +19,7 @@ namespace SupplyChainDashboardSample
             InventoryToSalesAnalysis.Add(new InventoryToSalesAnalysisPoint( Date, random.Next(80, 120), random.Next(80, 90), Math.Round(random.NextDouble() * (5.5 - 4.5) + 4.5, 2) ));
             SeedInventoryMovement();
             KPICards();
-            count = count + 1;
+            count++;
             return true;
         }
 
@@ -81,7 +81,7 @@ namespace SupplyChainDashboardSample
             if (Application.Current != null)
             {
                 Application.Current.Dispatcher.StartTimer(
-                    new TimeSpan(0, 0, 0, 1, 0),
+                    new TimeSpan(0, 0, 0, 2, 0),
                     UpdateVerticalData
                 );
             }
