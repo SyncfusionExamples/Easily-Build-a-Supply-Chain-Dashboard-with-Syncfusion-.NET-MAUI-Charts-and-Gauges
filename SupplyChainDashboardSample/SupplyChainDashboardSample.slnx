@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SupplyChainDashboardSample/SupplyChainDashboardSample.csproj">
+    <Deploy />
+  </Project>
+</Solution>
