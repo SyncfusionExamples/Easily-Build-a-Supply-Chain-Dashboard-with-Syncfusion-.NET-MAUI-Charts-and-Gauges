@@ -321,7 +321,7 @@
                             <chart:SfCartesianChart.YAxes>
                                 <chart:NumericalAxis TickPosition="Inside" ShowMajorGridLines="False" ShowMinorGridLines="False">
                                     <chart:NumericalAxis.LabelStyle>
-                                        <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                        <chart:ChartAxisLabelStyle LabelFormat="{Binding AxisLabelFormat}" TextColor="LightGray"/>
                                     </chart:NumericalAxis.LabelStyle>
                                 </chart:NumericalAxis>
                             </chart:SfCartesianChart.YAxes>

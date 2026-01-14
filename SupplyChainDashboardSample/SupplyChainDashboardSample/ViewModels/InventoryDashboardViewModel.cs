@@ -25,6 +25,7 @@ namespace SupplyChainDashboardSample
         private double _animatedInventoryToSalesRatio;
         private double _animatedAvgDaysOfSupply;
         private string _topItemsMetricPath = nameof(TopItem.Value);
+        private string _axisLabelFormat = "0$";
 
         /// <summary>
         /// Event raised when any bindable property value changes.
@@ -117,6 +118,11 @@ namespace SupplyChainDashboardSample
         /// </summary>
         public string TopItemsMetricPath { get => _topItemsMetricPath; set => Set(ref _topItemsMetricPath, value); }
 
+        /// <summary> 
+        /// Format string applied to axis labels in charts. 
+        /// </summary>
+        public string AxisLabelFormat { get => _axisLabelFormat; set => Set(ref _axisLabelFormat, value); }
+
         /// <summary>
         /// Command that switches the <see cref="TopItemsMetricPath"/> between Value and Quantity.
         /// </summary>
@@ -131,9 +137,18 @@ namespace SupplyChainDashboardSample
             TurnoverByHour = new ObservableCollection<TurnoverByHourPoint>();
             InventoryToSalesAnalysis = new ObservableCollection<InventoryToSalesAnalysisPoint>();
 
-            SetTopItemsMetricCommand = new Command<string>(p =>
-            {
-                TopItemsMetricPath = (p == "Quantity") ? nameof(TopItem.Quantity) : nameof(TopItem.Value);
+            SetTopItemsMetricCommand = new Command<string>(p => 
+            { 
+                if (p == "Quantity") 
+                { 
+                    TopItemsMetricPath = nameof(TopItem.Quantity); 
+                    AxisLabelFormat = "0,K";
+                } 
+                else 
+                { 
+                    TopItemsMetricPath = nameof(TopItem.Value); 
+                    AxisLabelFormat = "0$";
+                } 
             });
 
             TopItems.Add(new TopItem( "C100006", "C100006 - Cherry Finished Crystal Model", 14, 156000 ));

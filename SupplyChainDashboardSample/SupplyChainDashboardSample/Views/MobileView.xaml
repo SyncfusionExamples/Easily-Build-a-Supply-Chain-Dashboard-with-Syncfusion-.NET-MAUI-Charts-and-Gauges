@@ -358,7 +358,7 @@
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis ShowMajorGridLines="False" TickPosition="Inside">
                                         <chart:CategoryAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                            <chart:ChartAxisLabelStyle LabelFormat="{Binding AxisLabelFormat}" TextColor="LightGray"/>
                                         </chart:CategoryAxis.LabelStyle>
                                         <chart:CategoryAxis.MajorGridLineStyle>
                                             <chart:ChartLineStyle StrokeDashArray="2,4" Stroke="LightGray" StrokeWidth="1"/>
