@@ -212,7 +212,7 @@
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:DateTimeAxis EnableAutoIntervalOnZooming="False" TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="6">
                                         <chart:DateTimeAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                            <chart:ChartAxisLabelStyle LabelFormat="{OnPlatform Default=htt,Android=htt,iOS=htt}" TextColor="LightGray"/>
                                         </chart:DateTimeAxis.LabelStyle>
                                     </chart:DateTimeAxis>
                                 </chart:SfCartesianChart.XAxes>
@@ -244,7 +244,7 @@
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:DateTimeAxis EnableAutoIntervalOnZooming="False" TickPosition="Inside" ShowMajorGridLines="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="6">
                                         <chart:DateTimeAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                            <chart:ChartAxisLabelStyle LabelFormat="{OnPlatform Default=htt,Android=htt,iOS=htt}" TextColor="LightGray"/>
                                         </chart:DateTimeAxis.LabelStyle>
                                     </chart:DateTimeAxis>
                                 </chart:SfCartesianChart.XAxes>
@@ -313,7 +313,7 @@
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:DateTimeAxis EnableAutoIntervalOnZooming="False" Interval="1" IntervalType="Hours" AutoScrollingDeltaType="Hours" AutoScrollingDelta="6" TickPosition="Inside" ShowMajorGridLines="False">
                                         <chart:DateTimeAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                            <chart:ChartAxisLabelStyle LabelFormat="{OnPlatform Default=htt,Android=htt,iOS=htt}" TextColor="LightGray"/>
                                         </chart:DateTimeAxis.LabelStyle>
                                     </chart:DateTimeAxis>
                                 </chart:SfCartesianChart.XAxes>
@@ -351,14 +351,14 @@
                                 <chart:SfCartesianChart.YAxes>
                                     <chart:NumericalAxis TickPosition="Inside" ShowMajorGridLines="False" ShowMinorGridLines="False">
                                         <chart:NumericalAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
+                                            <chart:ChartAxisLabelStyle LabelFormat="{Binding AxisLabelFormat}" TextColor="LightGray"/>
                                         </chart:NumericalAxis.LabelStyle>
                                     </chart:NumericalAxis>
                                 </chart:SfCartesianChart.YAxes>
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis ShowMajorGridLines="False" TickPosition="Inside">
                                         <chart:CategoryAxis.LabelStyle>
-                                            <chart:ChartAxisLabelStyle LabelFormat="{Binding AxisLabelFormat}" TextColor="LightGray"/>
+                                            <chart:ChartAxisLabelStyle TextColor="LightGray"/>
                                         </chart:CategoryAxis.LabelStyle>
                                         <chart:CategoryAxis.MajorGridLineStyle>
                                             <chart:ChartLineStyle StrokeDashArray="2,4" Stroke="LightGray" StrokeWidth="1"/>
