@@ -81,7 +81,7 @@ namespace SupplyChainDashboardSample
             if (Application.Current != null)
             {
                 Application.Current.Dispatcher.StartTimer(
-                    new TimeSpan(0, 0, 0, 2, 0),
+                    new TimeSpan(0, 0, 0, 5, 0),
                     UpdateVerticalData
                 );
             }
