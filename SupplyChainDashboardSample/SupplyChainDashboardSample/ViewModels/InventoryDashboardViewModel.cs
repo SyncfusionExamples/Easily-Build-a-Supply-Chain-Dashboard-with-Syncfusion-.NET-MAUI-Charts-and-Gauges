@@ -23,7 +23,6 @@ namespace SupplyChainDashboardSample
         private string _animatedStockChange = string.Empty;
         private double _animatedTurnoverRatio;
         private double _animatedInventoryToSalesRatio;
-        private double _animatedAvgDaysOfSupply;
         private string _topItemsMetricPath = nameof(TopItem.Value);
         private string _axisLabelFormat = "0$";
 
@@ -107,11 +106,6 @@ namespace SupplyChainDashboardSample
         /// Animated KPI value for Inventory to Sales Ratio.
         /// </summary>
         public double AnimatedInventoryToSalesRatio { get => _animatedInventoryToSalesRatio; private set => Set(ref _animatedInventoryToSalesRatio, value); }
-
-        /// <summary>
-        /// Animated KPI value for Average Inventory Days of Supply.
-        /// </summary>
-        public double AnimatedAvgDaysOfSupply { get => _animatedAvgDaysOfSupply; private set => Set(ref _animatedAvgDaysOfSupply, value); }
 
         /// <summary>
         /// Binding path used by the Top Items list (Value or Quantity).

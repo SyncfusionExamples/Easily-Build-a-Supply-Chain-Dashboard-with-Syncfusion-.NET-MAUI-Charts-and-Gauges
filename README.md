@@ -8,7 +8,7 @@ Syncfusion’s .NET MAUI Supply Chain & Logistics Dashboard provides a cross-pla
 
 ## Key Features
 
-- **KPI Cards for instant insight:** Inventory Value, Stock Available, Turnover Ratio, Inventory to Sales Ratio, and Average Inventory Days of Supply
+- **KPI Cards for instant insight:** Inventory Value, Stock Available, Turnover Ratio, Inventory to Sales Ratio, and Deliverables time
 - **Dynamic charts:** ColumnSeries, SplineSeries, and WaterfallSeries for inventory trends, movement, and sales comparisons
 - **Top 10 items ranking:** Horizontal bar chart highlights high‑value SKUs, with the option to toggle between Value and Quantity for procurement and clearance decisions.
 - **Responsive layout:** Adaptive grid powered by .NET MAUI Cartesian Chart for desktop and mobile views
@@ -47,7 +47,7 @@ Syncfusion’s dashboard adapts naturally to logistics and supply chain workflow
 
 ## Output
 
-![SupplyChainDashboardImage](https://github.com/user-attachments/assets/ef3940a6-5778-456b-bad9-08b31e644ae9)
+![SupplyChainDashboardImage](https://github.com/user-attachments/assets/17918051-c99d-418c-b998-9a7bffaec220)
 
 ## Troubleshooting
 

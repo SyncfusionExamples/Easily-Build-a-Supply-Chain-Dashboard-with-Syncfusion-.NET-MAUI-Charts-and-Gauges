@@ -49,8 +49,7 @@ namespace SupplyChainDashboardSample
                 StockAvailableValue = Math.Round(random.NextDouble() * (3900000 - 3700000) + 3700000),
                 StockAvailableChange = $"Change: {Math.Round(random.NextDouble() * (60000 - 40000) + 40000):N0}",
                 TurnoverRatio = Math.Round(random.NextDouble() * (9.5 - 8.5) + 8.5, 2),
-                InventoryToSalesRatio = Math.Round(random.NextDouble() * (0.5 - 0.4) + 0.4, 2),
-                AvgInventoryDaysOfSupply = random.Next(35, 43),
+                InventoryToSalesRatio = Math.Round(random.NextDouble() * (60 - 45) + 45, 2),
             };
         }
 
