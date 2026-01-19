@@ -34,11 +34,6 @@ namespace SupplyChainDashboardSample
         /// Ratio of inventory to sales.
         /// </summary>
         public double InventoryToSalesRatio { get; set; }
-
-        /// <summary>
-        /// Average inventory days of supply.
-        /// </summary>
-        public double AvgInventoryDaysOfSupply { get; set; }
     }
 
     /// <summary>

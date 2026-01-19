@@ -137,10 +137,10 @@
                         <RoundRectangle CornerRadius="12"/>
                     </Border.StrokeShape>
                     <Grid RowDefinitions="Auto,Auto">
-                        <Label Text="INVENTORY TO SALES RATIO" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
+                        <Label Text="INVENTORY TO SALES RATIO ($)" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
                         <gauge:SfRadialGauge Grid.Row="1" HeightRequest="120" BackgroundColor="Transparent">
                             <gauge:SfRadialGauge.Axes>
-                                <gauge:RadialAxis Minimum="0" Maximum="1" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
+                                <gauge:RadialAxis Minimum="40" Maximum="70" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
                                     <gauge:RadialAxis.AxisLineStyle>
                                         <gauge:RadialLineStyle Thickness="20" />
                                     </gauge:RadialAxis.AxisLineStyle>
@@ -166,29 +166,29 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="12"/>
                     </Border.StrokeShape>
-                    <Grid RowDefinitions="Auto,Auto">
-                        <Label Text="AVERAGE INVENTORY DAYS OF SUPPLY" HorizontalTextAlignment="Center" FontSize="14" TextColor="#9ca3af"/>
-                        <gauge:SfRadialGauge Grid.Row="1" HeightRequest="120" BackgroundColor="Transparent">
-                            <gauge:SfRadialGauge.Axes>
-                                <gauge:RadialAxis Minimum="0" Maximum="60" StartAngle="180" EndAngle="0" ShowLabels="False" ShowTicks="False">
-                                    <gauge:RadialAxis.AxisLineStyle>
-                                        <gauge:RadialLineStyle Thickness="20" />
-                                    </gauge:RadialAxis.AxisLineStyle>
-                                    <gauge:RadialAxis.Pointers>
-                                        <gauge:RangePointer Value="{Binding Kpis.AvgInventoryDaysOfSupply}" PointerWidth="20" Fill="#ffcf66"/>
-                                    </gauge:RadialAxis.Pointers>
-                                    <gauge:RadialAxis.Annotations>
-                                        <gauge:GaugeAnnotation PositionFactor="0.0" DirectionUnit="Angle" DirectionValue="0">
-                                            <gauge:GaugeAnnotation.Content>
-                                                <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding Kpis.AvgInventoryDaysOfSupply, StringFormat='{0:0.00}'}" FontSize="16" FontAttributes="Bold" TextColor="LightGrey"/>
-                                                </Grid>
-                                            </gauge:GaugeAnnotation.Content>
-                                        </gauge:GaugeAnnotation>
-                                    </gauge:RadialAxis.Annotations>
-                                </gauge:RadialAxis>
-                            </gauge:SfRadialGauge.Axes>
-                        </gauge:SfRadialGauge>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="DELIVERABLES TIME" Grid.Row="0" HorizontalTextAlignment="Center" FontSize="15" TextColor="#9ca3af"/>
+                        <Label Grid.Row="1" Padding="0,15,0,0" HorizontalTextAlignment="Center" FontSize="14" TextColor="LightGrey">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Start Time: " FontSize="18" TextColor="LightGrey"/>
+                                    <Span Text="9 AM" FontAttributes="Bold" FontSize="18" TextColor="LightGrey"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Grid.Row="2" HorizontalTextAlignment="Center" FontSize="14" TextColor="LightGrey">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="End Time: " FontSize="18" TextColor="LightGrey"/>
+                                    <Span Text="5 PM" FontAttributes="Bold" FontSize="18" TextColor="LightGrey"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
                     </Grid>
                 </Border>
             </Grid>
