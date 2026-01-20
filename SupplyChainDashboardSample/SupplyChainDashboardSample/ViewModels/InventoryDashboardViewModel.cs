@@ -17,12 +17,6 @@ namespace SupplyChainDashboardSample
         private bool canStopTimer;
 
         private KpiCards? _kpis;
-        private double _animatedInventoryValue;
-        private string _animatedInventoryChange = string.Empty;
-        private double _animatedStockAvailable;
-        private string _animatedStockChange = string.Empty;
-        private double _animatedTurnoverRatio;
-        private double _animatedInventoryToSalesRatio;
         private string _topItemsMetricPath = nameof(TopItem.Value);
         private string _axisLabelFormat = "0$";
 
@@ -76,36 +70,6 @@ namespace SupplyChainDashboardSample
         /// Top items by value or quantity.
         /// </summary>
         public ObservableCollection<TopItem> TopItems { get; } = new();
-
-        /// <summary>
-        /// Animated KPI value bound to the Inventory Value card.
-        /// </summary>
-        public double AnimatedInventoryValue { get => _animatedInventoryValue; private set => Set(ref _animatedInventoryValue, value); }
-
-        /// <summary>
-        /// Animated KPI text for Inventory Value change.
-        /// </summary>
-        public string AnimatedInventoryChange { get => _animatedInventoryChange; private set => Set(ref _animatedInventoryChange, value); }
-
-        /// <summary>
-        /// Animated KPI value bound to the Stock Available card.
-        /// </summary>
-        public double AnimatedStockAvailable { get => _animatedStockAvailable; private set => Set(ref _animatedStockAvailable, value); }
-
-        /// <summary>
-        /// Animated KPI text for Stock Available change.
-        /// </summary>
-        public string AnimatedStockChange { get => _animatedStockChange; private set => Set(ref _animatedStockChange, value); }
-
-        /// <summary>
-        /// Animated KPI value for Turnover Ratio.
-        /// </summary>
-        public double AnimatedTurnoverRatio { get => _animatedTurnoverRatio; private set => Set(ref _animatedTurnoverRatio, value); }
-
-        /// <summary>
-        /// Animated KPI value for Inventory to Sales Ratio.
-        /// </summary>
-        public double AnimatedInventoryToSalesRatio { get => _animatedInventoryToSalesRatio; private set => Set(ref _animatedInventoryToSalesRatio, value); }
 
         /// <summary>
         /// Binding path used by the Top Items list (Value or Quantity).
