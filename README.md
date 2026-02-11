@@ -55,4 +55,4 @@ Syncfusion’s dashboard adapts naturally to logistics and supply chain workflow
 
 If you encounter a path too long exception when building this example project, close Visual Studio and rename the repository to short and build the project.
 
-For a step-by-step procedure, refer to the link.
+For a step-by-step procedure, refer to the [A Modern Supply Chain Dashboard Blog](https://www.syncfusion.com/blogs/post/build-supply-chain-dashboard-in-maui).
